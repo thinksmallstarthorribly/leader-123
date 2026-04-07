@@ -113,7 +113,18 @@ html,body{font-family:'Barlow',sans-serif;background:var(--charcoal);color:#fff;
 <script>
 (function() {
   const session = localStorage.getItem('leader123_access');
-  if (!session) { window.location.href = 'access.html'; }
+  if (!session) { window.location.href = 'access.html'; return; }
+})();
+
+// Mark this module as visited/complete when user arrives
+(function() {
+  try {
+    const progress = JSON.parse(localStorage.getItem('leader123_progress') || '{}');
+    if (!progress[4]) {
+      progress[4] = 'complete';
+      localStorage.setItem('leader123_progress', JSON.stringify(progress));
+    }
+  } catch(e) {}
 })();
 </script>
 </body>
