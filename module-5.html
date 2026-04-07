@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 05: Buy-In vs Compliance — Leader 1-2-3</title>
+<meta name="theme-color" content="#111111">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400&family=Barlow+Condensed:wght@700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --teal:#5ec5cc;--teal-d:#3aabb3;
+  --teal-p:rgba(94,197,204,0.08);--teal-b:rgba(94,197,204,0.2);
+  --charcoal:#111;--dark:#161622;--card:#1a1a1a;
+  --rule:rgba(255,255,255,0.07);--dim:rgba(255,255,255,0.4);
+  --green:#22c55e;
+}
+html,body{font-family:'Barlow',sans-serif;background:var(--charcoal);color:#fff;margin:0;overflow-x:hidden}
+.topnav{height:54px;background:rgba(17,17,17,0.96);backdrop-filter:blur(16px);border-bottom:1px solid var(--rule);display:flex;align-items:center;justify-content:space-between;padding:0 48px;position:sticky;top:0;z-index:100}
+.nav-logo{font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:900;letter-spacing:0.14em;text-transform:uppercase;color:var(--teal);text-decoration:none}
+.nav-back{font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--dim);text-decoration:none;transition:color 0.2s}
+.nav-back:hover{color:var(--teal)}
+.module-hero{background:var(--dark);padding:80px 48px 60px;border-bottom:1px solid var(--rule);position:relative;overflow:hidden}
+.module-hero::before{content:'';position:absolute;top:-80px;right:-40px;width:400px;height:400px;background:radial-gradient(circle,rgba(94,197,204,0.04) 0%,transparent 70%);pointer-events:none}
+.module-hero-inner{max-width:800px;position:relative;z-index:1}
+.module-eyebrow{font-size:10px;font-weight:800;letter-spacing:0.3em;text-transform:uppercase;color:var(--teal);margin-bottom:16px;display:flex;align-items:center;gap:16px}
+.module-eyebrow::before{content:'';display:block;width:24px;height:1px;background:var(--teal)}
+.module-title{font-family:'Barlow Condensed',sans-serif;font-size:clamp(40px,6vw,76px);font-weight:900;text-transform:uppercase;line-height:0.88;letter-spacing:-0.02em;margin-bottom:16px}
+.module-title em{color:var(--teal);font-style:normal}
+.module-sub{font-size:17px;color:var(--dim);line-height:1.7;max-width:600px}
+.rule-banner{background:var(--teal);padding:24px 48px;border-bottom:1px solid var(--rule)}
+.rule-banner-inner{max-width:800px}
+.rule-label{font-size:9px;font-weight:800;letter-spacing:0.25em;text-transform:uppercase;color:rgba(17,17,17,0.6);margin-bottom:6px}
+.rule-text{font-family:'Barlow Condensed',sans-serif;font-size:clamp(18px,2.5vw,26px);font-weight:900;text-transform:uppercase;color:var(--charcoal);line-height:1.1}
+.module-body{padding:64px 48px;max-width:800px;margin:0 auto}
+.body-section{margin-bottom:48px}
+.body-section h2{font-family:'Barlow Condensed',sans-serif;font-size:28px;font-weight:900;text-transform:uppercase;color:#fff;margin-bottom:16px;letter-spacing:-0.01em}
+.body-section h2 em{color:var(--teal);font-style:normal}
+.body-section p{font-size:16px;line-height:1.85;color:rgba(255,255,255,0.55);margin-bottom:14px}
+.body-section p strong{color:rgba(255,255,255,0.85)}
+.bullet-list{list-style:none;display:flex;flex-direction:column;gap:10px;margin:16px 0}
+.bullet-list li{font-size:15px;line-height:1.65;color:rgba(255,255,255,0.55);padding-left:22px;position:relative}
+.bullet-list li::before{content:'';position:absolute;left:0;top:10px;width:8px;height:1px;background:var(--teal)}
+.bullet-list li strong{color:rgba(255,255,255,0.8)}
+.callout{background:var(--card);border-left:2px solid var(--teal);padding:24px 28px;margin:28px 0}
+.callout p{font-size:16px;line-height:1.7;color:rgba(255,255,255,0.7);font-style:italic}
+.reflection{background:var(--dark);border:1px solid var(--rule);padding:32px;margin:40px 0}
+.reflection-label{font-size:9px;font-weight:800;letter-spacing:0.25em;text-transform:uppercase;color:var(--teal);margin-bottom:12px}
+.reflection textarea{width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--rule);color:#fff;font-family:'Barlow',sans-serif;font-size:14px;padding:16px;resize:vertical;min-height:100px;outline:none;line-height:1.6}
+.reflection textarea:focus{border-color:var(--teal-b)}
+.reflection textarea::placeholder{color:rgba(255,255,255,0.2)}
+.nav-buttons{display:flex;align-items:center;justify-content:space-between;padding:40px 48px;border-top:1px solid var(--rule);background:var(--dark)}
+.btn-nav{font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:900;letter-spacing:0.1em;text-transform:uppercase;padding:14px 28px;text-decoration:none;transition:all 0.2s;display:inline-block;border:none;cursor:pointer}
+.btn-prev{background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.5)}
+.btn-prev:hover{background:rgba(255,255,255,0.1);color:#fff}
+.btn-next{background:var(--teal);color:var(--charcoal)}
+.btn-next:hover{background:#7dd6dc}
+@media(max-width:640px){.module-hero{padding:60px 24px 40px}.module-body{padding:40px 24px}.nav-buttons{padding:28px 24px}.rule-banner{padding:20px 24px}.topnav{padding:0 20px}}
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <a href="/" class="nav-logo">LEADER 1-2-3</a>
+  <a href="portal.html" class="nav-back">← Dashboard</a>
+</nav>
+<div class="module-hero">
+  <div class="module-hero-inner">
+    <div class="module-eyebrow">Module 05 — Layer Three — The Mechanics</div>
+    <h1 class="module-title">Buy-In vs<br><em>Compliance</em></h1>
+    <p class="module-sub">When the value of the relationship goes away, so does the relationship. You can get compliance. You want buy-in.</p>
+  </div>
+</div>
+<div class="rule-banner">
+  <div class="rule-banner-inner">
+    <div class="rule-label">The Rule</div>
+    <div class="rule-text">When the value of the relationship goes away, so does the relationship.</div>
+  </div>
+</div>
+<div class="module-body">
+<div class="body-section"><h2>The <em>Difference</em> That Changes Everything</h2>
+<p>Compliance means people do what you ask because you have authority. <strong>Buy-in means people do it because they believe in it.</strong> These produce very different results — and very different cultures.</p>
+<ul class="bullet-list"><li>You might get short-term results from compliance</li>
+<li>Long-term success is undermined without buy-in</li>
+<li><strong>When the cat's away, the mice will play</strong> — that's compliance</li>
+<li>If they only feel competent when you're there, you failed</li>
+<li>If they only feel incompetent when you are there, you also failed</li>
+<li>Relationships of value are based on trust and reciprocity</li></ul>
+<div class="callout"><p>The terms of the deal make the deal. Bait and switch at your own risk. People remember when the deal changed without their input.</p></div>
+</div>
+<div class="body-section"><h2>How to <em>Build Buy-In</em></h2>
+<p>People will support what they can help to create. The most effective way to build buy-in is to involve your people in the process — not just inform them of the outcome.</p>
+<ul class="bullet-list"><li>A good idea is a good idea, no matter where it comes from</li>
+<li>Share the spoils. The credit belongs to the team.</li>
+<li>Always be willing to do in demonstration what you are asking of your people</li>
+<li><strong>Works hard to include others in the change process</strong></li>
+<li>Understands Skill vs Will — is this a capability issue or a motivation issue?</li></ul>
+</div>
+<div class="body-section"><h2>The <em>50/50 Rule</em></h2>
+<p>If you are working harder towards the achievement of someone's goals than they are, you are out. This is not callousness. It is the most useful boundary you can set as a leader.</p>
+<p>The 50/50 rule does not mean you only give 50%. It means you don't meet people where they are — you <strong>create a new standard and guide them forward</strong>. You push away the interested and pull in the committed.</p>
+<ul class="bullet-list"><li>Does not lower their own standards to find out what they are</li>
+<li>Believes in the value of each individual</li>
+<li>Personalises feedback</li>
+<li><strong>Accountability is the cornerstone of leadership</strong></li>
+<li>Great leaders facilitate, not dictate</li></ul>
+</div>
+
+<div class="reflection">
+  <div class="reflection-label">Reflection — Module 05</div>
+  <textarea placeholder="What landed for you in this module? Where do you see this playing out in your current role?"></textarea>
+</div>
+</div>
+<div class="nav-buttons">
+  <a href="module-4.html" class="btn-nav btn-prev">← Module 04</a>
+  <a href="module-6.html" class="btn-nav btn-next">Module 06 →</a>
+</div>
+<script>
+(function() {
+  const session = localStorage.getItem('leader123_access');
+  if (!session) { window.location.href = 'access.html'; }
+})();
+</script>
+</body>
+</html>

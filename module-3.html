@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 03: Ask, Don't Tell — Leader 1-2-3</title>
+<meta name="theme-color" content="#111111">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400&family=Barlow+Condensed:wght@700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --teal:#5ec5cc;--teal-d:#3aabb3;
+  --teal-p:rgba(94,197,204,0.08);--teal-b:rgba(94,197,204,0.2);
+  --charcoal:#111;--dark:#161622;--card:#1a1a1a;
+  --rule:rgba(255,255,255,0.07);--dim:rgba(255,255,255,0.4);
+  --green:#22c55e;
+}
+html,body{font-family:'Barlow',sans-serif;background:var(--charcoal);color:#fff;margin:0;overflow-x:hidden}
+.topnav{height:54px;background:rgba(17,17,17,0.96);backdrop-filter:blur(16px);border-bottom:1px solid var(--rule);display:flex;align-items:center;justify-content:space-between;padding:0 48px;position:sticky;top:0;z-index:100}
+.nav-logo{font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:900;letter-spacing:0.14em;text-transform:uppercase;color:var(--teal);text-decoration:none}
+.nav-back{font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--dim);text-decoration:none;transition:color 0.2s}
+.nav-back:hover{color:var(--teal)}
+.module-hero{background:var(--dark);padding:80px 48px 60px;border-bottom:1px solid var(--rule);position:relative;overflow:hidden}
+.module-hero::before{content:'';position:absolute;top:-80px;right:-40px;width:400px;height:400px;background:radial-gradient(circle,rgba(94,197,204,0.04) 0%,transparent 70%);pointer-events:none}
+.module-hero-inner{max-width:800px;position:relative;z-index:1}
+.module-eyebrow{font-size:10px;font-weight:800;letter-spacing:0.3em;text-transform:uppercase;color:var(--teal);margin-bottom:16px;display:flex;align-items:center;gap:16px}
+.module-eyebrow::before{content:'';display:block;width:24px;height:1px;background:var(--teal)}
+.module-title{font-family:'Barlow Condensed',sans-serif;font-size:clamp(40px,6vw,76px);font-weight:900;text-transform:uppercase;line-height:0.88;letter-spacing:-0.02em;margin-bottom:16px}
+.module-title em{color:var(--teal);font-style:normal}
+.module-sub{font-size:17px;color:var(--dim);line-height:1.7;max-width:600px}
+.rule-banner{background:var(--teal);padding:24px 48px;border-bottom:1px solid var(--rule)}
+.rule-banner-inner{max-width:800px}
+.rule-label{font-size:9px;font-weight:800;letter-spacing:0.25em;text-transform:uppercase;color:rgba(17,17,17,0.6);margin-bottom:6px}
+.rule-text{font-family:'Barlow Condensed',sans-serif;font-size:clamp(18px,2.5vw,26px);font-weight:900;text-transform:uppercase;color:var(--charcoal);line-height:1.1}
+.module-body{padding:64px 48px;max-width:800px;margin:0 auto}
+.body-section{margin-bottom:48px}
+.body-section h2{font-family:'Barlow Condensed',sans-serif;font-size:28px;font-weight:900;text-transform:uppercase;color:#fff;margin-bottom:16px;letter-spacing:-0.01em}
+.body-section h2 em{color:var(--teal);font-style:normal}
+.body-section p{font-size:16px;line-height:1.85;color:rgba(255,255,255,0.55);margin-bottom:14px}
+.body-section p strong{color:rgba(255,255,255,0.85)}
+.bullet-list{list-style:none;display:flex;flex-direction:column;gap:10px;margin:16px 0}
+.bullet-list li{font-size:15px;line-height:1.65;color:rgba(255,255,255,0.55);padding-left:22px;position:relative}
+.bullet-list li::before{content:'';position:absolute;left:0;top:10px;width:8px;height:1px;background:var(--teal)}
+.bullet-list li strong{color:rgba(255,255,255,0.8)}
+.callout{background:var(--card);border-left:2px solid var(--teal);padding:24px 28px;margin:28px 0}
+.callout p{font-size:16px;line-height:1.7;color:rgba(255,255,255,0.7);font-style:italic}
+.reflection{background:var(--dark);border:1px solid var(--rule);padding:32px;margin:40px 0}
+.reflection-label{font-size:9px;font-weight:800;letter-spacing:0.25em;text-transform:uppercase;color:var(--teal);margin-bottom:12px}
+.reflection textarea{width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--rule);color:#fff;font-family:'Barlow',sans-serif;font-size:14px;padding:16px;resize:vertical;min-height:100px;outline:none;line-height:1.6}
+.reflection textarea:focus{border-color:var(--teal-b)}
+.reflection textarea::placeholder{color:rgba(255,255,255,0.2)}
+.nav-buttons{display:flex;align-items:center;justify-content:space-between;padding:40px 48px;border-top:1px solid var(--rule);background:var(--dark)}
+.btn-nav{font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:900;letter-spacing:0.1em;text-transform:uppercase;padding:14px 28px;text-decoration:none;transition:all 0.2s;display:inline-block;border:none;cursor:pointer}
+.btn-prev{background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.5)}
+.btn-prev:hover{background:rgba(255,255,255,0.1);color:#fff}
+.btn-next{background:var(--teal);color:var(--charcoal)}
+.btn-next:hover{background:#7dd6dc}
+@media(max-width:640px){.module-hero{padding:60px 24px 40px}.module-body{padding:40px 24px}.nav-buttons{padding:28px 24px}.rule-banner{padding:20px 24px}.topnav{padding:0 20px}}
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <a href="/" class="nav-logo">LEADER 1-2-3</a>
+  <a href="portal.html" class="nav-back">← Dashboard</a>
+</nav>
+<div class="module-hero">
+  <div class="module-hero-inner">
+    <div class="module-eyebrow">Module 03 — Layer Two — The Method</div>
+    <h1 class="module-title">Ask, Don't<br><em>Tell</em></h1>
+    <p class="module-sub">Questions lead to engagement. Commands shut down creativity. The best leaders ask before they direct.</p>
+  </div>
+</div>
+<div class="rule-banner">
+  <div class="rule-banner-inner">
+    <div class="rule-label">The Rule</div>
+    <div class="rule-text">Questions lead to engagement. Commands shut down creativity.</div>
+  </div>
+</div>
+<div class="module-body">
+<div class="body-section"><h2>Why <em>Telling</em> Doesn't Work</h2>
+<p>People are far more open to the idea of change when they are not being <strong>told</strong> to change. The moment you issue a directive, you've created resistance. The moment you ask a question, you've created engagement.</p>
+<ul class="bullet-list"><li>Commands spark resistance</li>
+<li>Questions spark solutions</li>
+<li>Curious leaders create empowered teams</li>
+<li>Questions show respect for people and their ideas</li>
+<li><strong>The best leaders ask before they direct</strong></li>
+<li>If you want to make life hard for yourself, start telling people things</li></ul>
+<div class="callout"><p>Seek first to understand, and then to be understood. This is not a soft principle. It is a precision tool.</p></div>
+</div>
+<div class="body-section"><h2>What <em>Jason Taught Me</em></h2>
+<p>Jason never raised his voice. He never told me what to do about my shoes. He asked me questions until I talked myself into the corner.</p>
+<p><em>"So you feel that because other people are doing the wrong thing... you should be able to do the wrong thing too?"</em></p>
+<p><strong>Fuck. 2-0 and finished.</strong> That was not manipulation. That was precision questioning. He understood my position better than I did because he asked. Then he reflected it back in a way I couldn't argue with.</p>
+<div class="callout"><p>Active listening turned into something close to a psychic power. Instead of hearing what people said, I was able to see into their minds and understand what was driving it. I was good at telling — not asking. Making the switch was one of the most important things I ever did.</p></div>
+</div>
+<div class="body-section"><h2>Ask <em>Great Questions</em>. Get Great Information.</h2>
+<p>The quality of your questions determines the quality of your understanding. And the quality of your understanding determines the quality of your decisions.</p>
+<ul class="bullet-list"><li>Ask great questions, get great information</li>
+<li>Seek to understand before you seek to be understood</li>
+<li>Listening transforms leadership</li>
+<li><strong>Shut up. And actually listen.</strong></li></ul>
+</div>
+
+<div class="reflection">
+  <div class="reflection-label">Reflection — Module 03</div>
+  <textarea placeholder="What landed for you in this module? Where do you see this playing out in your current role?"></textarea>
+</div>
+</div>
+<div class="nav-buttons">
+  <a href="module-2.html" class="btn-nav btn-prev">← Module 02</a>
+  <a href="module-4.html" class="btn-nav btn-next">Module 04 →</a>
+</div>
+<script>
+(function() {
+  const session = localStorage.getItem('leader123_access');
+  if (!session) { window.location.href = 'access.html'; }
+})();
+</script>
+</body>
+</html>
