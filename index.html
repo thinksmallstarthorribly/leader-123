@@ -11,24 +11,17 @@
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --teal:#5ec5cc;
-  --teal-d:#3aabb3;
-  --teal-p:rgba(94,197,204,0.08);
-  --teal-b:rgba(94,197,204,0.2);
-  --charcoal:#111;
-  --dark:#1a1a2e;
-  --ink:#0d0d0d;
-  --card:#1e1e1e;
-  --rule:rgba(255,255,255,0.07);
-  --dim:rgba(255,255,255,0.4);
-  --faint:rgba(255,255,255,0.15);
-  --bright:rgba(255,255,255,0.9);
+  --teal:#5ec5cc;--teal-d:#3aabb3;
+  --teal-p:rgba(94,197,204,0.08);--teal-b:rgba(94,197,204,0.2);
+  --charcoal:#111;--dark:#161622;--ink:#0d0d0d;--card:#1a1a1a;
+  --rule:rgba(255,255,255,0.07);--dim:rgba(255,255,255,0.4);
+  --faint:rgba(255,255,255,0.15);--bright:rgba(255,255,255,0.9);
 }
 html{scroll-behavior:smooth}
 body{font-family:'Barlow',sans-serif;background:var(--charcoal);color:#fff;margin:0;overflow-x:hidden}
 
 /* NAV */
-.nav{position:fixed;top:0;left:0;right:0;z-index:100;height:54px;padding:0 48px;display:flex;align-items:center;justify-content:space-between;background:rgba(17,17,17,0.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--rule)}
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;height:54px;padding:0 48px;display:flex;align-items:center;justify-content:space-between;background:rgba(17,17,17,0.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--rule)}
 .nav-logo{font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:900;letter-spacing:0.12em;text-transform:uppercase;color:var(--teal);text-decoration:none}
 .nav-links{display:flex;align-items:center;gap:32px}
 .nav-link{font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--dim);text-decoration:none;transition:color 0.2s}
@@ -37,103 +30,132 @@ body{font-family:'Barlow',sans-serif;background:var(--charcoal);color:#fff;margi
 .nav-cta:hover{background:var(--teal-p)}
 @media(max-width:640px){.nav-link{display:none}.nav{padding:0 20px}}
 
-/* HERO */
+/* BUTTONS */
+.btn-primary{font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:900;letter-spacing:0.1em;text-transform:uppercase;background:var(--teal);color:var(--charcoal);border:none;padding:18px 44px;cursor:pointer;text-decoration:none;display:inline-block;transition:all 0.2s}
+.btn-primary:hover{background:#7dd6dc;transform:translateY(-1px)}
+
+/* ════════════════════════════════════
+   STAGE 1: ATTACH
+   Hook the emotion already running.
+   New leaders feel lost, exposed,
+   out of their depth. Activate it.
+   ════════════════════════════════════ */
 .hero{min-height:100vh;padding:140px 48px 100px;display:flex;align-items:center;position:relative;overflow:hidden;border-bottom:1px solid var(--rule)}
-.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 70% 40%,rgba(94,197,204,0.05) 0%,transparent 70%);pointer-events:none}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 70% 40%,rgba(94,197,204,0.05) 0%,transparent 70%),radial-gradient(ellipse 40% 60% at 10% 90%,rgba(94,197,204,0.03) 0%,transparent 60%);pointer-events:none}
 .hero-inner{max-width:900px;margin:0 auto;position:relative;z-index:1}
 .hero-label{font-size:11px;font-weight:800;letter-spacing:0.3em;text-transform:uppercase;color:var(--teal);margin-bottom:28px;display:block}
 .hero-title{font-family:'Barlow Condensed',sans-serif;font-size:clamp(52px,9vw,108px);font-weight:900;text-transform:uppercase;line-height:0.88;letter-spacing:-0.02em;margin-bottom:36px}
 .hero-title span{color:var(--teal);display:block}
-.hero-subtitle{font-size:clamp(16px,2.5vw,22px);line-height:1.7;color:rgba(255,255,255,0.65);max-width:680px;margin-bottom:36px}
-.hero-subtitle em{color:var(--teal);font-style:italic}
-.hero-opener{font-size:17px;line-height:1.85;color:rgba(255,255,255,0.6);max-width:620px;margin-bottom:48px}
-.hero-opener strong{color:#fff}
-.btn-primary{font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:900;letter-spacing:0.1em;text-transform:uppercase;background:var(--teal);color:var(--charcoal);border:none;padding:18px 44px;cursor:pointer;text-decoration:none;display:inline-block;transition:all 0.2s}
-.btn-primary:hover{background:#7dd6dc;transform:translateY(-1px)}
-.hero-meta{font-size:12px;color:var(--dim);letter-spacing:0.04em;line-height:1.7;margin-top:20px}
+.hero-body{font-size:17px;line-height:1.85;color:rgba(255,255,255,0.6);max-width:660px;margin-bottom:18px}
+.hero-body strong{color:#fff}
+.hero-cta-block{display:flex;align-items:center;gap:24px;flex-wrap:wrap;margin-top:40px}
+.hero-meta{font-size:12px;color:var(--dim);letter-spacing:0.04em;line-height:1.7}
 .hero-meta strong{color:rgba(255,255,255,0.7)}
+@media(max-width:640px){.hero{padding:100px 24px 72px}}
 
 /* STATS STRIP */
 .stats-strip{border-bottom:1px solid var(--rule);padding:0 48px;display:flex;align-items:stretch;overflow-x:auto}
-@media(max-width:640px){.stats-strip{padding:0 20px}}
 .stat-item{padding:20px 32px;border-right:1px solid var(--rule);white-space:nowrap;flex-shrink:0}
 .stat-item:last-child{border-right:none}
 .stat-num{font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:900;color:var(--teal);line-height:1}
 .stat-label{font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--dim);margin-top:3px}
+@media(max-width:640px){.stats-strip{padding:0 20px}}
 
-/* SHARED SECTION */
+/* SHARED */
 .section{padding:100px 48px;border-bottom:1px solid var(--rule)}
 .section-inner{max-width:900px;margin:0 auto}
 .eyebrow{font-size:10px;font-weight:800;letter-spacing:0.3em;text-transform:uppercase;color:var(--teal);margin-bottom:20px;display:block}
-.section-title{font-family:'Barlow Condensed',sans-serif;font-size:clamp(36px,5vw,60px);font-weight:900;text-transform:uppercase;line-height:0.92;letter-spacing:-0.01em;margin-bottom:28px}
+.section-title{font-family:'Barlow Condensed',sans-serif;font-size:clamp(36px,5vw,64px);font-weight:900;text-transform:uppercase;line-height:0.92;letter-spacing:-0.01em;margin-bottom:28px}
 .section-title em{color:var(--teal);font-style:normal}
-.body-copy{font-size:16px;line-height:1.85;color:rgba(255,255,255,0.6);max-width:680px}
+.body-copy{font-size:16px;line-height:1.85;color:rgba(255,255,255,0.55);max-width:700px;margin-bottom:16px}
 .body-copy strong{color:rgba(255,255,255,0.85)}
-.body-copy+.body-copy{margin-top:16px}
-@media(max-width:640px){.section{padding:60px 24px}}
+.pull-quote{border-left:2px solid var(--teal);padding:20px 0 20px 28px;margin:36px 0;max-width:680px}
+.pull-quote p{font-size:19px;line-height:1.65;color:rgba(255,255,255,0.8);font-style:italic}
+@media(max-width:640px){.section{padding:64px 24px}}
 
-/* PROBLEM */
-.problem-section{padding:100px 48px;background:var(--dark);border-bottom:1px solid var(--rule)}
-.problem-inner{max-width:900px;margin:0 auto}
-.problem-list{list-style:none;display:flex;flex-direction:column;gap:16px;margin-top:36px;max-width:680px}
-.problem-list li{font-size:15px;line-height:1.7;color:rgba(255,255,255,0.6);padding-left:22px;position:relative}
-.problem-list li::before{content:'';position:absolute;left:0;top:10px;width:8px;height:1px;background:var(--teal)}
-.problem-list li strong{color:rgba(255,255,255,0.85)}
-.pull-quote{border-left:2px solid var(--teal);padding:20px 0 20px 24px;margin:36px 0;max-width:680px}
-.pull-quote p{font-size:18px;line-height:1.7;color:rgba(255,255,255,0.8);font-style:italic}
-@media(max-width:640px){.problem-section{padding:60px 24px}}
+/* ════════════════════════════════════
+   STAGE 2: ENTER
+   StoryBrand call-and-response.
+   "You shouldn't have to feel X."
+   Moral reframe: you weren't given
+   the tools. Not a failure — a gap.
+   ════════════════════════════════════ */
+.enter-section{padding:100px 48px;background:var(--dark);border-bottom:1px solid var(--rule)}
+.enter-inner{max-width:900px;margin:0 auto}
+.shouldnt-list{list-style:none;display:flex;flex-direction:column;gap:0;margin:40px 0;max-width:700px}
+.shouldnt-item{display:grid;grid-template-columns:1fr 1fr;gap:0;border-bottom:1px solid var(--rule)}
+.shouldnt-item:last-child{border-bottom:none}
+.shouldnt-pain{padding:24px 24px 24px 0;font-size:15px;line-height:1.65;color:rgba(255,255,255,0.25);font-style:italic;border-right:1px solid var(--rule)}
+.shouldnt-answer{padding:24px 0 24px 24px;font-size:15px;line-height:1.65;color:rgba(255,255,255,0.6)}
+.shouldnt-answer strong{color:var(--teal)}
+@media(max-width:640px){.enter-section{padding:64px 24px}.shouldnt-item{grid-template-columns:1fr}.shouldnt-pain{border-right:none;border-bottom:1px solid var(--rule);padding:20px 0 12px}.shouldnt-answer{padding:12px 0 20px}}
 
-/* THREE LAYERS */
+/* ════════════════════════════════════
+   STAGE 3: REPLICATE
+   Once named, pattern can't run
+   invisibly. The three-layer
+   framework makes it explicit.
+   "You can see it now."
+   ════════════════════════════════════ */
 .layers{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:48px}
 @media(max-width:768px){.layers{grid-template-columns:1fr}}
 .layer-card{background:var(--card);border:1px solid var(--rule);padding:40px 32px;position:relative;overflow:hidden}
 .layer-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--teal)}
-.layer-num{font-family:'Barlow Condensed',sans-serif;font-size:72px;font-weight:900;color:var(--teal);opacity:0.1;line-height:1;margin-bottom:8px}
-.layer-title{font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:900;text-transform:uppercase;letter-spacing:0.05em;color:#fff;margin-bottom:12px}
-.layer-sub{font-size:12px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--teal);margin-bottom:16px}
-.layer-body{font-size:13px;line-height:1.75;color:rgba(255,255,255,0.45)}
-
-/* RULES GRID */
-.rules-section{padding:100px 48px;background:var(--dark);border-bottom:1px solid var(--rule)}
-.rules-inner{max-width:900px;margin:0 auto}
-.rules-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-top:48px}
-@media(max-width:768px){.rules-grid{grid-template-columns:1fr}}
-.rule-card{background:var(--charcoal);border:1px solid var(--rule);padding:32px 28px;transition:border-color 0.2s}
-.rule-card:hover{border-color:var(--teal-b)}
-.rule-num{font-family:'Barlow Condensed',sans-serif;font-size:48px;font-weight:900;color:var(--teal);opacity:0.15;line-height:1;margin-bottom:8px}
-.rule-label{font-size:9px;font-weight:800;letter-spacing:0.25em;text-transform:uppercase;color:var(--teal);margin-bottom:10px}
-.rule-title{font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:900;text-transform:uppercase;color:#fff;line-height:1.1;margin-bottom:10px}
-.rule-body{font-size:13px;line-height:1.7;color:rgba(255,255,255,0.4)}
-.rule-body strong{color:rgba(255,255,255,0.7)}
-@media(max-width:640px){.rules-section{padding:60px 24px}}
+.layer-num{font-family:'Barlow Condensed',sans-serif;font-size:80px;font-weight:900;color:var(--teal);opacity:0.08;line-height:1;margin-bottom:8px}
+.layer-sub{font-size:9px;font-weight:800;letter-spacing:0.25em;text-transform:uppercase;color:var(--teal);margin-bottom:10px}
+.layer-title{font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:900;text-transform:uppercase;color:#fff;margin-bottom:12px}
+.layer-body{font-size:13px;line-height:1.75;color:rgba(255,255,255,0.4)}
 
 /* MODULES */
-.modules-section{padding:100px 48px;border-bottom:1px solid var(--rule)}
+.modules-section{padding:100px 48px;background:var(--dark);border-bottom:1px solid var(--rule)}
 .modules-inner{max-width:900px;margin:0 auto}
 .modules-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-top:48px}
 @media(max-width:768px){.modules-grid{grid-template-columns:1fr}}
-.mod-card{background:var(--card);border:1px solid var(--rule);padding:32px 28px;position:relative}
-.mod-num{font-family:'Barlow Condensed',sans-serif;font-size:56px;font-weight:900;color:var(--teal);opacity:0.12;line-height:1;position:absolute;top:16px;right:20px}
+.mod-card{background:var(--charcoal);border:1px solid var(--rule);padding:32px 28px;position:relative;transition:border-color 0.2s}
+.mod-card:hover{border-color:var(--teal-b)}
+.mod-num{font-family:'Barlow Condensed',sans-serif;font-size:56px;font-weight:900;color:var(--teal);opacity:0.1;line-height:1;position:absolute;top:14px;right:18px}
 .mod-tag{font-size:9px;font-weight:800;letter-spacing:0.22em;text-transform:uppercase;color:var(--teal);margin-bottom:10px}
-.mod-title{font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:900;text-transform:uppercase;color:#fff;margin-bottom:10px;line-height:1.1;padding-right:48px}
-.mod-body{font-size:13px;line-height:1.75;color:rgba(255,255,255,0.4)}
-@media(max-width:640px){.modules-section{padding:60px 24px}}
+.mod-title{font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:900;text-transform:uppercase;color:#fff;margin-bottom:10px;line-height:1.1;padding-right:52px}
+.mod-body{font-size:13px;line-height:1.75;color:rgba(255,255,255,0.38)}
+@media(max-width:640px){.modules-section{padding:64px 24px}}
 
-/* DEFEND / OBJECTIONS */
-.defend-section{padding:100px 48px;background:var(--dark);border-bottom:1px solid var(--rule)}
+/* ════════════════════════════════════
+   STAGE 4: DEFEND
+   Convert resistance into evidence.
+   Every objection is a mirror.
+   The thought that says "not now"
+   is the leadership gap talking.
+   ════════════════════════════════════ */
+.defend-section{padding:100px 48px;border-bottom:1px solid var(--rule)}
 .defend-inner{max-width:900px;margin:0 auto}
 .obj-list{display:flex;flex-direction:column;gap:0;margin-top:40px}
 .obj{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--rule)}
 .obj:last-child{border-bottom:none}
-@media(max-width:640px){.obj{grid-template-columns:1fr}}
-.obj-thought{padding:28px 32px 28px 0;font-size:15px;font-style:italic;color:rgba(255,255,255,0.2);line-height:1.6;border-right:1px solid var(--rule)}
-.obj-reframe{padding:28px 0 28px 32px;font-size:14px;color:rgba(255,255,255,0.55);line-height:1.7}
+.obj-thought{padding:28px 28px 28px 0;font-size:15px;font-style:italic;color:rgba(255,255,255,0.2);line-height:1.65;border-right:1px solid var(--rule)}
+.obj-reframe{padding:28px 0 28px 28px;font-size:14px;color:rgba(255,255,255,0.55);line-height:1.7}
 .obj-reframe strong{color:var(--teal)}
-@media(max-width:640px){.defend-section{padding:60px 24px}.obj-thought{border-right:none;border-bottom:1px solid var(--rule);padding:24px 0 16px}.obj-reframe{padding:16px 0 24px}}
+.defend-close{font-size:17px;line-height:1.8;color:rgba(255,255,255,0.45);margin-top:40px;max-width:680px}
+.defend-close strong{color:#fff}
+@media(max-width:640px){.defend-section{padding:64px 24px}.obj{grid-template-columns:1fr}.obj-thought{border-right:none;border-bottom:1px solid var(--rule);padding:20px 0 12px}.obj-reframe{padding:12px 0 20px}}
+
+/* ════════════════════════════════════
+   STAGE 5: TRANSMIT
+   Identity upgrade. Not what you
+   learn — who you become.
+   The leader other people choose
+   to follow. That identity spreads.
+   ════════════════════════════════════ */
+.transmit-section{padding:100px 48px;background:var(--dark);border-bottom:1px solid var(--rule);text-align:center}
+.transmit-inner{max-width:800px;margin:0 auto}
+.transmit-title{font-family:'Barlow Condensed',sans-serif;font-size:clamp(40px,6vw,80px);font-weight:900;text-transform:uppercase;line-height:0.9;letter-spacing:-0.02em;margin-bottom:28px}
+.transmit-title em{color:var(--teal);font-style:normal;display:block}
+.transmit-body{font-size:17px;line-height:1.85;color:rgba(255,255,255,0.55);max-width:640px;margin:0 auto 18px}
+.transmit-body strong{color:#fff}
+@media(max-width:640px){.transmit-section{padding:64px 24px}}
 
 /* PRICING */
 .pricing-section{padding:100px 48px;border-bottom:1px solid var(--rule);text-align:center}
-.pricing-inner{max-width:560px;margin:0 auto}
+.pricing-inner{max-width:540px;margin:0 auto}
 .price-card{background:var(--card);border:1px solid var(--teal-b);padding:56px 48px;margin-top:48px;position:relative}
 .price-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--teal)}
 .price-was{font-size:12px;color:var(--dim);letter-spacing:0.15em;text-transform:uppercase;text-decoration:line-through;margin-bottom:8px}
@@ -141,11 +163,11 @@ body{font-family:'Barlow',sans-serif;background:var(--charcoal);color:#fff;margi
 .price-currency{font-size:28px;vertical-align:top;padding-top:14px;display:inline-block}
 .price-note{font-size:11px;color:var(--dim);margin-top:8px;letter-spacing:0.12em;text-transform:uppercase}
 .price-includes{text-align:left;margin:36px 0;list-style:none;display:flex;flex-direction:column;gap:0}
-.price-includes li{font-size:13px;color:rgba(255,255,255,0.6);padding:12px 0;border-bottom:1px solid var(--rule);display:flex;align-items:center;gap:12px;text-transform:uppercase;font-weight:700;letter-spacing:0.05em}
+.price-includes li{font-size:13px;color:rgba(255,255,255,0.55);padding:12px 0;border-bottom:1px solid var(--rule);display:flex;align-items:center;gap:12px;text-transform:uppercase;font-weight:700;letter-spacing:0.04em}
 .price-includes li::before{content:'→';color:var(--teal);flex-shrink:0}
-.price-cta{display:block;width:100%;padding:20px;background:var(--teal);color:var(--charcoal);font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:900;letter-spacing:0.12em;text-transform:uppercase;text-decoration:none;transition:all 0.2s}
+.price-cta{display:block;width:100%;padding:20px;background:var(--teal);color:var(--charcoal);font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:900;letter-spacing:0.12em;text-transform:uppercase;text-decoration:none;transition:all 0.2s;margin-top:4px}
 .price-cta:hover{background:#7dd6dc}
-@media(max-width:640px){.pricing-section{padding:60px 24px}.price-card{padding:36px 24px}}
+@media(max-width:640px){.pricing-section{padding:64px 24px}.price-card{padding:36px 24px}}
 
 /* FOOTER */
 .footer{padding:56px 48px;text-align:center;border-top:1px solid var(--rule)}
@@ -166,95 +188,107 @@ body{font-family:'Barlow',sans-serif;background:var(--charcoal);color:#fff;margi
 </nav>
 
 
-<!-- HERO -->
+<!-- ══════════════════════════════════════════════
+     STAGE 1: ATTACH
+     The emotion is already running before they
+     arrive here. New leaders feel out of their
+     depth, exposed, secretly afraid they got it
+     wrong. We name it before they decide to read.
+     ══════════════════════════════════════════════ -->
 <section class="hero">
   <div class="hero-inner">
     <span class="hero-label">A Mini Programme for New Leaders</span>
     <h1 class="hero-title">
-      My first year in management<br>
+      My first year in management
       <span>was a shit-show.</span>
     </h1>
-    <p class="hero-subtitle">...and I wouldn't trade it for the world. <em>Here's everything I learned.</em></p>
-    <p class="hero-opener">
-      When they gave me the title, nobody handed me a framework. I had to build mine the hard way. Through every wrong call, every team meeting that went sideways, every moment I confused managing things with leading people.
-    </p>
-    <p class="hero-opener">
-      <strong>Leader 1-2-3 is what I wish someone had given me on day one.</strong> The framework that resolves 90% of what makes leadership hard. The rules nobody tells you until after you've broken them.
-    </p>
-    <a href="access.html" class="btn-primary">Start Leader 1-2-3</a>
-    <p class="hero-meta" style="margin-top:20px">
-      <strong>6 modules.</strong> Built for new leaders. Practical from module one.
-    </p>
+    <p class="hero-body">...and I wouldn't trade it for the world. But you don't have to do it my way.</p>
+    <p class="hero-body">You already know the feeling. You got the title. The team. The responsibility. And nobody handed you the framework for what to do next. <strong>You are not alone in that. And it is not a reflection of your capability.</strong></p>
+    <p class="hero-body">It is a gap in what you were given. Leader 1-2-3 closes that gap.</p>
+    <div class="hero-cta-block">
+      <a href="access.html" class="btn-primary">Start Leader 1-2-3</a>
+    </div>
+    <p class="hero-meta" style="margin-top:20px"><strong>6 modules.</strong> Built for new leaders. Practical from module one.</p>
   </div>
 </section>
 
-<!-- STATS STRIP -->
+<!-- STATS -->
 <div class="stats-strip">
-  <div class="stat-item">
-    <div class="stat-num">3</div>
-    <div class="stat-label">Core Layers</div>
-  </div>
-  <div class="stat-item">
-    <div class="stat-num">6</div>
-    <div class="stat-label">Modules</div>
-  </div>
-  <div class="stat-item">
-    <div class="stat-num">12</div>
-    <div class="stat-label">Leadership Rules</div>
-  </div>
-  <div class="stat-item">
-    <div class="stat-num">∞</div>
-    <div class="stat-label">Lifetime Access</div>
-  </div>
+  <div class="stat-item"><div class="stat-num">3</div><div class="stat-label">Core Layers</div></div>
+  <div class="stat-item"><div class="stat-num">6</div><div class="stat-label">Modules</div></div>
+  <div class="stat-item"><div class="stat-num">12</div><div class="stat-label">Leadership Rules</div></div>
+  <div class="stat-item"><div class="stat-num">∞</div><div class="stat-label">Lifetime Access</div></div>
 </div>
 
 
-<!-- PROBLEM -->
-<section class="problem-section">
-  <div class="problem-inner">
-    <span class="eyebrow">The Problem</span>
-    <h2 class="section-title">They gave you the title.<br><em>Not the framework.</em></h2>
-    <p class="body-copy">Most new leaders fail not because they lack capability. They fail because they're operating from the wrong model. They were promoted because they were good at their job. Then they tried to do everyone else's job too.</p>
-    <ul class="problem-list">
-      <li>You were promoted for technical skill and handed a people problem</li>
-      <li>You confuse <strong>managing things</strong> with <strong>leading people</strong> — these are not the same</li>
-      <li>You tell when you should ask. You control when you should empower.</li>
-      <li>You get compliance when you need buy-in</li>
-      <li>You protect your position when you should be building your people</li>
-      <li>You mistake the absence of visible failure for progress</li>
+<!-- ══════════════════════════════════════════════
+     STAGE 2: ENTER — StoryBrand call and response
+     "You shouldn't have to feel X."
+     "With X, now you won't have to."
+     Moral reframe: the gap is not your fault.
+     You were promoted. Not prepared.
+     ══════════════════════════════════════════════ -->
+<section class="enter-section">
+  <div class="enter-inner">
+    <span class="eyebrow">You Shouldn't Have to Feel This</span>
+    <h2 class="section-title">They promoted you.<br><em>They didn't prepare you.</em></h2>
+    <p class="body-copy">You were given a title and handed a people problem. The skills that got you promoted are not the same skills that make you effective now. That is not a failure. <strong>It is a gap in what you were given.</strong> And it is fixable.</p>
+    <ul class="shouldnt-list">
+      <li class="shouldnt-item">
+        <div class="shouldnt-pain">"I shouldn't have to feel like I'm making it up as I go."</div>
+        <div class="shouldnt-answer">With the Leader 1-2-3 framework, <strong>you won't have to.</strong> You'll have a clear operating model from day one.</div>
+      </li>
+      <li class="shouldnt-item">
+        <div class="shouldnt-pain">"I shouldn't have to choose between being liked and being respected."</div>
+        <div class="shouldnt-answer">You don't. <strong>Competent leaders who lead from humanity don't have to choose.</strong> This programme shows you why.</div>
+      </li>
+      <li class="shouldnt-item">
+        <div class="shouldnt-pain">"I shouldn't have to fight for buy-in every single time."</div>
+        <div class="shouldnt-answer">You won't, once you understand the difference between <strong>compliance and genuine buy-in</strong> — and how to build the latter.</div>
+      </li>
+      <li class="shouldnt-item">
+        <div class="shouldnt-pain">"I shouldn't have to wonder why my team disengages when I leave the room."</div>
+        <div class="shouldnt-answer">You won't have to wonder. <strong>This programme tells you exactly why it happens and how to stop it.</strong></div>
+      </li>
     </ul>
     <div class="pull-quote">
       <p>"Until I became a Leader, I was stuck operating from my position title of Manager... and making all the mistakes that come with it."</p>
     </div>
-    <p class="body-copy">There is a specific, learnable difference between management and leadership. Most people never learn it explicitly. They either figure it out slowly, or they don't figure it out at all. This programme makes it explicit.</p>
   </div>
 </section>
 
 
-<!-- THREE LAYERS -->
+<!-- ══════════════════════════════════════════════
+     STAGE 3: REPLICATE
+     Once named, the pattern can't run invisibly.
+     The three-layer framework gives them a lens.
+     They start seeing their own leadership through
+     it in real time.
+     ══════════════════════════════════════════════ -->
 <section class="section" id="framework">
   <div class="section-inner">
     <span class="eyebrow">The Framework</span>
-    <h2 class="section-title">1-2-3.<br><em>Three layers. One framework.</em></h2>
-    <p class="body-copy">Leadership isn't complicated. It's just rarely taught in the right order. Leader 1-2-3 gives you the three layers of effective leadership... built from the ground up.</p>
+    <h2 class="section-title">1-2-3.<br><em>Three layers. One operating system.</em></h2>
+    <p class="body-copy">Leadership isn't complicated. It's just rarely taught in the right order. Most leaders get the mechanics first and never get the mindset. Leader 1-2-3 builds from the ground up. In the order it actually works.</p>
+    <p class="body-copy">Once you see these three layers, you will see every leadership challenge through them. <strong>The framework doesn't just teach you. It changes how you operate.</strong></p>
     <div class="layers">
       <div class="layer-card">
         <div class="layer-num">1</div>
         <div class="layer-sub">Layer One</div>
         <div class="layer-title">The Mindset</div>
-        <div class="layer-body">Manager vs Leader. Title vs Competency. Identity drives behaviour. Before you can lead anyone else, you have to understand what leadership actually is... and what it isn't.</div>
+        <div class="layer-body">Manager vs Leader. Title vs Competency. Identity drives behaviour. You cannot lead effectively from the wrong model. This layer gives you the right one. Everything else builds from here.</div>
       </div>
       <div class="layer-card">
         <div class="layer-num">2</div>
         <div class="layer-sub">Layer Two</div>
         <div class="layer-title">The Method</div>
-        <div class="layer-body">Ask don't tell. Speak to actions not people. Communication as the critical skill. How you interact with your people determines everything. These are learnable behaviours.</div>
+        <div class="layer-body">Ask don't tell. Speak to actions. Communication as the critical skill. How you show up in every interaction determines your results. These are learnable, repeatable behaviours.</div>
       </div>
       <div class="layer-card">
         <div class="layer-num">3</div>
         <div class="layer-sub">Layer Three</div>
         <div class="layer-title">The Mechanics</div>
-        <div class="layer-body">Buy-in vs compliance. The 50/50 rule. Recognition as currency. The three choices every leader has. These are the operational principles that make or break a leadership culture.</div>
+        <div class="layer-body">Buy-in vs compliance. The 50/50 rule. Recognition as currency. The three choices. These are the operational principles that determine whether your leadership culture thrives or quietly deteriorates.</div>
       </div>
     </div>
   </div>
@@ -266,73 +300,99 @@ body{font-family:'Barlow',sans-serif;background:var(--charcoal);color:#fff;margi
   <div class="modules-inner">
     <span class="eyebrow">The Programme</span>
     <h2 class="section-title">6 modules.<br><em>No filler. All framework.</em></h2>
-    <p class="body-copy">Each module is short, direct, and builds on the last. Developed from 10 years of leadership experience across multiple industries. This is the field guide nobody gave you.</p>
+    <p class="body-copy">Each module is short, direct, and builds on the last. Developed from a decade of leadership across multiple industries. These are the rules that resolve 90% of what makes leadership hard.</p>
     <div class="modules-grid">
       <div class="mod-card">
         <div class="mod-num">01</div>
         <div class="mod-tag">Module 1 — The Mindset</div>
         <div class="mod-title">Management vs Leadership</div>
-        <div class="mod-body">The single most important distinction in your leadership journey. Management speaks to things. Leadership speaks to people. Understand this and you resolve 90% of your challenges.</div>
+        <div class="mod-body">Management speaks to things. Leadership speaks to people. People do not like being treated like things. Once you understand this distinction clearly, 90% of your leadership challenges become navigable.</div>
       </div>
       <div class="mod-card">
         <div class="mod-num">02</div>
         <div class="mod-tag">Module 2 — The Mindset</div>
         <div class="mod-title">Title vs Competency</div>
-        <div class="mod-body">Your title does not make you a leader. Beware the walking, talking resume. Trust is earned through competent action and inspired results — not through a job description.</div>
+        <div class="mod-body">Titles don't inspire trust. Competent actions and inspired results do. The walking, talking resume is one of the most destructive patterns in leadership. We name it here so you never become one.</div>
       </div>
       <div class="mod-card">
         <div class="mod-num">03</div>
         <div class="mod-tag">Module 3 — The Method</div>
         <div class="mod-title">Ask, Don't Tell</div>
-        <div class="mod-body">Questions lead to engagement. Commands shut down creativity. The best leaders ask before they direct. Curious leaders create empowered teams. If you want to make life hard for yourself, start telling people things.</div>
+        <div class="mod-body">Questions spark solutions. Commands spark resistance. The best leaders ask before they direct. Curious leaders create empowered teams. If you want to make life hard for yourself, start telling people things.</div>
       </div>
       <div class="mod-card">
         <div class="mod-num">04</div>
         <div class="mod-tag">Module 4 — The Method</div>
         <div class="mod-title">Speak to the Actions</div>
-        <div class="mod-body">Effective communication is the number one critical life skill. Emotionally intelligent enough to leave their feelings out of critical communications. Guided by events, not feelings. Hears horses, not zebras.</div>
+        <div class="mod-body">Effective communication is the most critical leadership skill. Guided by events, not feelings. Hears horses not zebras. Understands the difference between problem solving and problem admiration.</div>
       </div>
       <div class="mod-card">
         <div class="mod-num">05</div>
         <div class="mod-tag">Module 5 — The Mechanics</div>
         <div class="mod-title">Buy-In vs Compliance</div>
-        <div class="mod-body">You might get short-term results from compliance. Long-term success requires buy-in. When the value of the relationship goes away, so does the relationship. The terms of the deal make the deal.</div>
+        <div class="mod-body">When the value of the relationship goes away, so does the relationship. You can get short-term compliance. Long-term success requires something different. This module teaches you to tell the difference and build the right one.</div>
       </div>
       <div class="mod-card">
         <div class="mod-num">06</div>
         <div class="mod-tag">Module 6 — The Mechanics</div>
         <div class="mod-title">Recognition is Currency</div>
-        <div class="mod-body">People will forego other things of value to be recognised for the value they bring. 99% of your wins come from the efforts of your people. Unseen contributions lead to visible disengagement. Celebrate loudly and publicly.</div>
+        <div class="mod-body">99% of your wins come from your people. Unseen contributions lead to visible disengagement. People will forego other things of value to be recognised for the value they bring. Recognition is not a nice-to-have. It is a mechanism.</div>
       </div>
     </div>
   </div>
 </section>
 
 
-<!-- DEFEND -->
+<!-- ══════════════════════════════════════════════
+     STAGE 4: DEFEND
+     Convert resistance into evidence.
+     The thought that says "I know this already"
+     or "I don't have time" is the leadership gap
+     talking. Named and defused.
+     ══════════════════════════════════════════════ -->
 <section class="defend-section">
   <div class="defend-inner">
-    <span class="eyebrow">Common Objections</span>
-    <h2 class="section-title">The thoughts that<br><em>arrive right now.</em></h2>
-    <p class="body-copy">You've been reading. Something landed. Right on schedule, a thought arrived to talk you out of it. Here are the most common versions.</p>
+    <span class="eyebrow">The Resistance Arrives Here</span>
+    <h2 class="section-title">Notice what<br><em>just happened.</em></h2>
+    <p class="body-copy">You have been reading. Something landed. And right on schedule, a thought arrived to talk you out of acting on it. That thought is not logic. Here are the most common versions.</p>
     <div class="obj-list">
       <div class="obj">
-        <div class="obj-thought">"I've been managing people for years. I know this stuff."</div>
-        <div class="obj-reframe">Knowing it and doing it are different problems. Most leaders who struggle already know the principles. <strong>The framework makes the difference between knowing and operating.</strong></div>
+        <div class="obj-thought">"I already know this stuff. I've managed people for years."</div>
+        <div class="obj-reframe">Knowing a principle and operating from it are different problems. Most struggling leaders can name every rule in this programme. <strong>The framework is what turns knowing into doing.</strong></div>
       </div>
       <div class="obj">
         <div class="obj-thought">"Leadership just comes naturally to some people."</div>
-        <div class="obj-reframe">Nobody is born knowing how to distinguish buy-in from compliance, or when to deploy the 50/50 rule. <strong>These are learnable skills. Every effective leader learned them.</strong></div>
+        <div class="obj-reframe">Nobody is born knowing the 50/50 rule or when to deploy it. Every effective leader learned these things somewhere. <strong>Most learned them the hard way. You don't have to.</strong></div>
       </div>
       <div class="obj">
         <div class="obj-thought">"I don't have time for another course."</div>
-        <div class="obj-reframe">The time you spend not having this framework is costing you more than the time it takes to get it. <strong>Every team meeting that goes wrong, every resignation, every compliance-not-buy-in moment — that's the price.</strong></div>
+        <div class="obj-reframe">Every team meeting that goes sideways, every resignation, every moment you get compliance instead of buy-in — that is the cost of not having this framework. <strong>The time it takes to get it costs less than the time it costs not to have it.</strong></div>
       </div>
       <div class="obj">
         <div class="obj-thought">"My organisation has its own leadership training."</div>
-        <div class="obj-reframe">Most organisational training teaches what leadership looks like. <strong>This teaches how it works.</strong> Those are different things. One is a description. The other is a framework.</div>
+        <div class="obj-reframe">Organisational training teaches what leadership looks like. <strong>This teaches how it works.</strong> One is a description. The other is an operating system. They are not the same thing.</div>
       </div>
     </div>
+    <p class="defend-close">You do not owe loyalty to a thought just because it arrived with a feeling attached to it. <strong>The thought that says "not now" is the gap this programme addresses.</strong></p>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     STAGE 5: TRANSMIT
+     Identity upgrade. Not what you learn.
+     Who you become. The leader other people
+     choose to follow. That identity is contagious
+     — your team picks it up and carries it forward.
+     ══════════════════════════════════════════════ -->
+<section class="transmit-section">
+  <div class="transmit-inner">
+    <span class="eyebrow">Who You Become</span>
+    <h2 class="transmit-title">The leader people<br><em>choose to follow.</em></h2>
+    <p class="transmit-body">Not the manager they have to report to. Not the title they comply with. <strong>The leader whose team performs when they leave the room.</strong> The one who builds loyalty instead of earning compliance.</p>
+    <p class="transmit-body">Your people are watching how you lead. They will model what they see. The standard you set in your first year becomes the culture of your team. <strong>That culture outlasts you.</strong></p>
+    <p class="transmit-body">That is what changes. Not just your results. The standard you leave behind.</p>
+    <a href="access.html" class="btn-primary" style="margin-top:36px;display:inline-block">I'm ready. Start Leader 1-2-3.</a>
   </div>
 </section>
 
@@ -342,15 +402,15 @@ body{font-family:'Barlow',sans-serif;background:var(--charcoal);color:#fff;margi
   <div class="pricing-inner">
     <span class="eyebrow">Get Started</span>
     <h2 class="section-title">One price.<br><em>Complete access.</em></h2>
-    <p class="body-copy" style="margin:0 auto;text-align:center">All 6 modules, the workbook, and lifetime access. No subscriptions. No upsells. The leader who does this programme operates differently from the leader who started it.</p>
+    <p class="body-copy" style="margin:0 auto;text-align:center">All 6 modules, the workbook, and lifetime access. No subscriptions. No upsells. The leader who does this programme does not operate the same way afterwards.</p>
     <div class="price-card">
       <div class="price-was">Full Price $97 AUD</div>
       <div class="price-now"><span class="price-currency">$</span>47</div>
       <div class="price-note">Launch Price — Available Now · AUD</div>
       <ul class="price-includes">
         <li>6 Complete Modules — The Full Framework</li>
-        <li>The Management vs Leadership Distinction — Explained</li>
-        <li>The 12 Rules — Referenced and Operational</li>
+        <li>The 3-Layer Operating System — Mindset, Method, Mechanics</li>
+        <li>The 12 Leadership Rules — Referenced and Operational</li>
         <li>Leader 1-2-3 Workbook</li>
         <li>Lifetime Access — Revisit Whenever You Need To</li>
         <li>Works on Any Device</li>
