@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portal — Leader 1-2-3</title>
+<meta name="theme-color" content="#111111">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;600;700;800;900&family=Barlow+Condensed:wght@700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --teal:#5ec5cc;--teal-d:#3aabb3;
+  --teal-p:rgba(94,197,204,0.08);--teal-b:rgba(94,197,204,0.2);
+  --charcoal:#111;--dark:#161622;--card:#1a1a1a;
+  --rule:rgba(255,255,255,0.07);--dim:rgba(255,255,255,0.4);
+  --green:#22c55e;--green-p:rgba(34,197,94,0.1);
+}
+html,body{height:100%;font-family:'Barlow',sans-serif;background:var(--charcoal);color:#fff;margin:0}
+body{display:flex;flex-direction:column}
+
+/* NAV */
+.topnav{height:56px;background:rgba(17,17,17,0.96);backdrop-filter:blur(16px);border-bottom:1px solid var(--rule);display:flex;align-items:center;justify-content:space-between;padding:0 32px;flex-shrink:0;position:sticky;top:0;z-index:100}
+.nav-logo{font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:900;letter-spacing:0.14em;text-transform:uppercase;color:var(--teal);text-decoration:none}
+.nav-right{display:flex;align-items:center;gap:20px}
+.nav-user{font-size:12px;color:var(--dim);font-weight:600;letter-spacing:0.06em;text-transform:uppercase}
+.nav-signout{font-size:10px;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.2);background:none;border:none;cursor:pointer;padding:4px 0}
+.nav-signout:hover{color:var(--dim)}
+
+/* SHELL */
+.shell{display:flex;flex:1;min-height:0;overflow:hidden}
+
+/* SIDEBAR */
+.sidebar{width:260px;background:var(--dark);border-right:1px solid var(--rule);flex-shrink:0;overflow-y:auto;padding:24px 0}
+.sb-section{font-size:9px;font-weight:800;letter-spacing:0.25em;text-transform:uppercase;color:rgba(255,255,255,0.18);padding:0 20px 8px;margin-top:8px}
+.sb-item{display:flex;align-items:center;gap:10px;padding:10px 20px;cursor:pointer;border-left:2px solid transparent;transition:all 0.15s;text-decoration:none}
+.sb-item:hover{background:rgba(255,255,255,0.03)}
+.sb-item.active{border-left-color:var(--teal);background:var(--teal-p)}
+.sb-item.done{opacity:0.6}
+.sb-icon{width:28px;height:28px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0;font-weight:700}
+.sb-icon.complete{background:var(--green-p);color:var(--green)}
+.sb-icon.current{background:var(--teal-p);color:var(--teal)}
+.sb-icon.next{background:rgba(255,255,255,0.04);color:rgba(255,255,255,0.3)}
+.sb-icon.locked{background:rgba(255,255,255,0.02);color:rgba(255,255,255,0.15)}
+.sb-info{flex:1;min-width:0}
+.sb-num{font-size:9px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.25);margin-bottom:2px}
+.sb-label{font-size:12px;font-weight:600;color:rgba(255,255,255,0.45);line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sb-item.active .sb-label{color:#fff}
+.sb-item.active .sb-num{color:rgba(94,197,204,0.6)}
+.sb-divider{height:1px;background:var(--rule);margin:12px 20px}
+@media(max-width:900px){.sidebar{display:none}}
+
+/* MAIN */
+.main{flex:1;overflow-y:auto;background:var(--charcoal)}
+
+/* HERO */
+.portal-hero{background:var(--dark);padding:48px;border-bottom:1px solid var(--rule);position:relative;overflow:hidden}
+.portal-hero::before{content:'';position:absolute;top:-60px;right:0;width:400px;height:400px;background:radial-gradient(circle,rgba(94,197,204,0.04) 0%,transparent 70%);pointer-events:none}
+.portal-hero-inner{max-width:800px;position:relative;z-index:1}
+.portal-eyebrow{font-size:10px;font-weight:800;letter-spacing:0.3em;text-transform:uppercase;color:var(--teal);margin-bottom:12px;display:block}
+.portal-title{font-family:'Barlow Condensed',sans-serif;font-size:clamp(28px,4vw,48px);font-weight:900;text-transform:uppercase;line-height:0.92;letter-spacing:-0.01em;margin-bottom:12px}
+.portal-title em{color:var(--teal);font-style:normal}
+.portal-sub{font-size:15px;color:var(--dim);line-height:1.65;max-width:560px;margin-bottom:28px}
+.btn-continue{font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:900;letter-spacing:0.1em;text-transform:uppercase;background:var(--teal);color:var(--charcoal);border:none;padding:14px 32px;cursor:pointer;text-decoration:none;display:inline-block;transition:all 0.2s}
+.btn-continue:hover{background:#7dd6dc}
+@media(max-width:640px){.portal-hero{padding:32px 24px}}
+
+/* PROGRESS */
+.progress-bar-wrap{background:var(--dark);padding:0 48px;border-bottom:1px solid var(--rule)}
+.progress-track{display:flex;align-items:center;gap:3px;padding:16px 0}
+.progress-step{flex:1;height:3px;border-radius:2px;background:var(--rule);overflow:hidden}
+.progress-step.done{background:var(--green)}
+.progress-step.active{background:linear-gradient(90deg,var(--teal) 30%,var(--rule) 30%)}
+.progress-label{font-size:9px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.2);text-align:center;margin-top:5px}
+@media(max-width:640px){.progress-bar-wrap{padding:0 24px}}
+
+/* BODY */
+.portal-body{padding:40px 48px 80px}
+@media(max-width:640px){.portal-body{padding:28px 24px 60px}}
+
+/* STATS */
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-bottom:40px;border:1px solid var(--rule)}
+@media(max-width:640px){.stats-row{grid-template-columns:repeat(2,1fr)}}
+.stat-card{background:var(--card);padding:20px 24px}
+.stat-num{font-family:'Barlow Condensed',sans-serif;font-size:32px;font-weight:900;color:var(--teal);line-height:1;margin-bottom:4px}
+.stat-label{font-size:9px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.3)}
+
+/* MODULE GRID */
+.section-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.section-eyebrow{font-size:10px;font-weight:800;letter-spacing:0.25em;text-transform:uppercase;color:var(--teal)}
+.module-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;margin-bottom:40px;border:1px solid var(--rule)}
+@media(max-width:768px){.module-grid{grid-template-columns:1fr}}
+.mod-card{background:var(--card);padding:28px;position:relative;text-decoration:none;display:block;transition:background 0.15s}
+.mod-card:hover{background:#1e1e1e}
+.mod-card.active-mod{border-left:2px solid var(--teal)}
+.mod-card.locked-mod{opacity:0.45;pointer-events:none}
+.mod-card-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.mod-num-badge{font-size:9px;font-weight:800;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.25);background:rgba(255,255,255,0.05);padding:3px 8px}
+.mod-status{font-size:9px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;padding:3px 8px}
+.status-done{background:var(--green-p);color:var(--green)}
+.status-active{background:var(--teal-p);color:var(--teal)}
+.status-next{background:rgba(255,255,255,0.04);color:rgba(255,255,255,0.3)}
+.status-locked{background:rgba(255,255,255,0.02);color:rgba(255,255,255,0.2)}
+.mod-title{font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:900;text-transform:uppercase;color:#fff;margin-bottom:8px;line-height:1.1;padding-right:40px}
+.mod-ghost-num{font-family:'Barlow Condensed',sans-serif;font-size:64px;font-weight:900;color:rgba(94,197,204,0.07);line-height:1;position:absolute;top:12px;right:16px}
+.mod-body{font-size:12px;line-height:1.65;color:rgba(255,255,255,0.35);margin-bottom:16px}
+.mod-bar{height:2px;background:var(--rule);margin-bottom:10px;overflow:hidden}
+.mod-bar-fill{height:100%}
+.fill-done{background:var(--green)}
+.fill-active{background:var(--teal)}
+.mod-footer{display:flex;align-items:center;justify-content:space-between}
+.mod-pct{font-size:11px;font-weight:700;color:var(--dim)}
+.mod-btn{font-size:10px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;padding:7px 14px;border:none;cursor:pointer;text-decoration:none;display:inline-block}
+.btn-review{background:var(--green-p);color:var(--green)}
+.btn-start{background:var(--teal);color:var(--charcoal)}
+.btn-cont{background:var(--teal-p);color:var(--teal)}
+.btn-locked{background:rgba(255,255,255,0.04);color:rgba(255,255,255,0.2);cursor:not-allowed}
+
+/* BOTTOM ROW */
+.bottom-row{display:grid;grid-template-columns:1fr 1fr;gap:2px}
+@media(max-width:768px){.bottom-row{grid-template-columns:1fr}}
+.panel{background:var(--card);border:1px solid var(--rule);padding:28px}
+.panel-title{font-size:10px;font-weight:800;letter-spacing:0.25em;text-transform:uppercase;color:var(--teal);margin-bottom:20px}
+.activity-item{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid var(--rule)}
+.activity-item:last-child{border-bottom:none;padding-bottom:0}
+.activity-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.activity-text{flex:1}
+.activity-name{font-size:13px;font-weight:600;color:rgba(255,255,255,0.7)}
+.activity-meta{font-size:11px;color:var(--dim);margin-top:2px}
+.activity-time{font-size:11px;color:var(--dim);flex-shrink:0}
+.rule-item{padding:14px 0;border-bottom:1px solid var(--rule)}
+.rule-item:last-child{border-bottom:none;padding-bottom:0}
+.rule-num{font-size:9px;font-weight:800;letter-spacing:0.15em;text-transform:uppercase;color:var(--teal);margin-bottom:4px}
+.rule-text{font-size:13px;font-weight:700;color:rgba(255,255,255,0.6);line-height:1.4;text-transform:uppercase;letter-spacing:0.03em}
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <a href="/" class="nav-logo">LEADER 1-2-3</a>
+  <div class="nav-right">
+    <span class="nav-user">Your Programme</span>
+    <button class="nav-signout" onclick="signOut()">Sign Out</button>
+  </div>
+</nav>
+
+<div class="shell">
+  <aside class="sidebar">
+    <div class="sb-section">Programme</div>
+    <a href="module-1.html" class="sb-item done">
+      <div class="sb-icon complete">✓</div>
+      <div class="sb-info"><div class="sb-num">Module 01</div><div class="sb-label">Management vs Leadership</div></div>
+    </a>
+    <a href="module-2.html" class="sb-item active">
+      <div class="sb-icon current">▶</div>
+      <div class="sb-info"><div class="sb-num">Module 02</div><div class="sb-label">Title vs Competency</div></div>
+    </a>
+    <a href="module-3.html" class="sb-item">
+      <div class="sb-icon next">○</div>
+      <div class="sb-info"><div class="sb-num">Module 03</div><div class="sb-label">Ask, Don't Tell</div></div>
+    </a>
+    <a href="module-4.html" class="sb-item">
+      <div class="sb-icon next">○</div>
+      <div class="sb-info"><div class="sb-num">Module 04</div><div class="sb-label">Speak to the Actions</div></div>
+    </a>
+    <a href="module-5.html" class="sb-item">
+      <div class="sb-icon next">○</div>
+      <div class="sb-info"><div class="sb-num">Module 05</div><div class="sb-label">Buy-In vs Compliance</div></div>
+    </a>
+    <a href="module-6.html" class="sb-item">
+      <div class="sb-icon next">○</div>
+      <div class="sb-info"><div class="sb-num">Module 06</div><div class="sb-label">Recognition is Currency</div></div>
+    </a>
+    <div class="sb-divider"></div>
+    <div class="sb-section">Resources</div>
+    <a href="#" class="sb-item">
+      <div class="sb-icon next">📄</div>
+      <div class="sb-info"><div class="sb-label">Leader 1-2-3 Workbook</div></div>
+    </a>
+    <a href="https://lifecircuitry.com" class="sb-item" target="_blank">
+      <div class="sb-icon next">→</div>
+      <div class="sb-info"><div class="sb-label">Life Circuitry Programme</div></div>
+    </a>
+  </aside>
+
+  <main class="main" id="main-content">
+    <div class="portal-hero" id="portal-hero">
+      <div class="portal-hero-inner">
+        <span class="portal-eyebrow">Your Dashboard</span>
+        <h1 class="portal-title" id="hero-title">Welcome to<br><em>Leader 1-2-3.</em></h1>
+        <p class="portal-sub" id="hero-sub">Start with Module 01 — the single distinction that resolves 90% of what makes leadership hard.</p>
+        <a href="module-1.html" class="btn-continue" id="hero-cta">Start Module 01 →</a>
+      </div>
+    </div>
+
+    <div class="progress-bar-wrap">
+      <div class="progress-track" id="progress-track">
+        <div style="flex:1"><div class="progress-step" id="ps-1"></div><div class="progress-label" id="pl-1">01</div></div>
+        <div style="flex:1"><div class="progress-step" id="ps-2"></div><div class="progress-label" id="pl-2">02</div></div>
+        <div style="flex:1"><div class="progress-step" id="ps-3"></div><div class="progress-label" id="pl-3">03</div></div>
+        <div style="flex:1"><div class="progress-step" id="ps-4"></div><div class="progress-label" id="pl-4">04</div></div>
+        <div style="flex:1"><div class="progress-step" id="ps-5"></div><div class="progress-label" id="pl-5">05</div></div>
+        <div style="flex:1"><div class="progress-step" id="ps-6"></div><div class="progress-label" id="pl-6">06</div></div>
+      </div>
+    </div>
+
+    <div class="portal-body">
+
+      <div class="stats-row">
+        <div class="stat-card"><div class="stat-num" id="stat-done">0</div><div class="stat-label">Modules Done</div></div>
+        <div class="stat-card"><div class="stat-num" id="stat-current">—</div><div class="stat-label">Current Module</div></div>
+        <div class="stat-card"><div class="stat-num" id="stat-rules">0</div><div class="stat-label">Rules Unlocked</div></div>
+        <div class="stat-card"><div class="stat-num">∞</div><div class="stat-label">Lifetime Access</div></div>
+      </div>
+
+      <div class="section-head"><span class="section-eyebrow">Your Modules</span></div>
+      <div class="module-grid">
+
+        <div class="mod-card" id="mc-1">
+          <div class="mod-ghost-num">01</div>
+          <div class="mod-card-top">
+            <span class="mod-num-badge">Module 01</span>
+            <span class="mod-status status-next" id="ms-1">Not Started</span>
+          </div>
+          <div class="mod-title">Management vs Leadership</div>
+          <div class="mod-body">Management speaks to things. Leadership speaks to people. This single distinction resolves 90% of what makes your first year hard.</div>
+          <div class="mod-bar"><div class="mod-bar-fill" id="mf-1" style="width:0%"></div></div>
+          <div class="mod-footer"><span class="mod-pct" id="mp-1">Not started</span><a href="module-1.html" class="mod-btn btn-start" id="mb-1">Start →</a></div>
+        </div>
+
+        <div class="mod-card" id="mc-2">
+          <div class="mod-ghost-num">02</div>
+          <div class="mod-card-top">
+            <span class="mod-num-badge">Module 02</span>
+            <span class="mod-status status-next" id="ms-2">Not Started</span>
+          </div>
+          <div class="mod-title">Title vs Competency</div>
+          <div class="mod-body">Your title does not make you a leader. Trust is earned through competent action and inspired results — not through a job description.</div>
+          <div class="mod-bar"><div class="mod-bar-fill" id="mf-2" style="width:0%"></div></div>
+          <div class="mod-footer"><span class="mod-pct" id="mp-2">Not started</span><a href="module-2.html" class="mod-btn btn-start" id="mb-2">Start →</a></div>
+        </div>
+
+        <div class="mod-card">
+          <div class="mod-ghost-num">03</div>
+          <div class="mod-card-top">
+            <span class="mod-num-badge">Module 03</span>
+            <span class="mod-status status-next">Not Started</span>
+          </div>
+          <div class="mod-title">Ask, Don't Tell</div>
+          <div class="mod-body">Questions spark solutions. Commands spark resistance. Curious leaders create empowered teams. If you want to make life hard for yourself, start telling people things.</div>
+          <div class="mod-bar"><div class="mod-bar-fill" style="width:0%"></div></div>
+          <div class="mod-footer"><span class="mod-pct">Not started</span><a href="module-3.html" class="mod-btn btn-start">Start →</a></div>
+        </div>
+
+        <div class="mod-card">
+          <div class="mod-ghost-num">04</div>
+          <div class="mod-card-top">
+            <span class="mod-num-badge">Module 04</span>
+            <span class="mod-status status-next">Not Started</span>
+          </div>
+          <div class="mod-title">Speak to the Actions</div>
+          <div class="mod-body">Effective communication is the most critical leadership skill. Guided by events, not feelings. Hears horses, not zebras. Understands problem solving vs problem admiration.</div>
+          <div class="mod-bar"><div class="mod-bar-fill" style="width:0%"></div></div>
+          <div class="mod-footer"><span class="mod-pct">Not started</span><a href="module-4.html" class="mod-btn btn-start">Start →</a></div>
+        </div>
+
+        <div class="mod-card">
+          <div class="mod-ghost-num">05</div>
+          <div class="mod-card-top">
+            <span class="mod-num-badge">Module 05</span>
+            <span class="mod-status status-next">Not Started</span>
+          </div>
+          <div class="mod-title">Buy-In vs Compliance</div>
+          <div class="mod-body">When the value of the relationship goes away, so does the relationship. Short-term compliance is easy. Long-term buy-in is the only thing that actually works.</div>
+          <div class="mod-bar"><div class="mod-bar-fill" style="width:0%"></div></div>
+          <div class="mod-footer"><span class="mod-pct">Not started</span><a href="module-5.html" class="mod-btn btn-start">Start →</a></div>
+        </div>
+
+        <div class="mod-card">
+          <div class="mod-ghost-num">06</div>
+          <div class="mod-card-top">
+            <span class="mod-num-badge">Module 06</span>
+            <span class="mod-status status-next">Not Started</span>
+          </div>
+          <div class="mod-title">Recognition is Currency</div>
+          <div class="mod-body">99% of your wins come from your people. Unseen contributions lead to visible disengagement. Recognition is not a nice-to-have. It is a mechanism.</div>
+          <div class="mod-bar"><div class="mod-bar-fill" style="width:0%"></div></div>
+          <div class="mod-footer"><span class="mod-pct">Not started</span><a href="module-6.html" class="mod-btn btn-start">Start →</a></div>
+        </div>
+
+      </div>
+
+      <div class="bottom-row">
+        <div class="panel">
+          <div class="panel-title">Recent Activity</div>
+          <div class="activity-item">
+            <div class="activity-dot" style="background:var(--green)"></div>
+            <div class="activity-text"><div class="activity-name">Completed Module 01</div><div class="activity-meta">Management vs Leadership</div></div>
+            <div class="activity-time">2 days ago</div>
+          </div>
+          <div class="activity-item">
+            <div class="activity-dot" style="background:var(--teal)"></div>
+            <div class="activity-text"><div class="activity-name">Started Module 02</div><div class="activity-meta">Title vs Competency</div></div>
+            <div class="activity-time">Today</div>
+          </div>
+          <div class="activity-item">
+            <div class="activity-dot" style="background:var(--teal)"></div>
+            <div class="activity-text"><div class="activity-name">Accessed Programme</div><div class="activity-meta">Leader 1-2-3</div></div>
+            <div class="activity-time">3 days ago</div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-title">The 12 Rules</div>
+          <div class="rule-item"><div class="rule-num">Rule 01</div><div class="rule-text">People do not like to be treated like things</div></div>
+          <div class="rule-item"><div class="rule-num">Rule 02</div><div class="rule-text">Questions lead to engagement; commands shut down creativity</div></div>
+          <div class="rule-item"><div class="rule-num">Rule 03</div><div class="rule-text">Titles don't inspire trust. Competent actions do.</div></div>
+          <div class="rule-item" style="opacity:0.3"><div class="rule-num">Rules 04–12</div><div class="rule-text">Unlock as you progress through the modules</div></div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<script>
+// Auth check
+(function() {
+  const session = localStorage.getItem('leader123_access');
+  if (!session) { window.location.href = 'access.html'; return; }
+  try {
+    const data = JSON.parse(session);
+    const age = Date.now() - data.ts;
+    if (age > 90 * 24 * 60 * 60 * 1000) { localStorage.removeItem('leader123_access'); window.location.href = 'access.html'; }
+  } catch(e) { window.location.href = 'access.html'; }
+})();
+
+function signOut() {
+  localStorage.removeItem('leader123_access');
+  window.location.href = 'access.html';
+}
+
+// Progress tracking
+const MODULES = [
+  { num: 1, title: 'Management vs Leadership', file: 'module-1.html' },
+  { num: 2, title: 'Title vs Competency', file: 'module-2.html' },
+  { num: 3, title: 'Ask, Don't Tell', file: 'module-3.html' },
+  { num: 4, title: 'Speak to the Actions', file: 'module-4.html' },
+  { num: 5, title: 'Buy-In vs Compliance', file: 'module-5.html' },
+  { num: 6, title: 'Recognition is Currency', file: 'module-6.html' },
+];
+
+function getProgress() {
+  try { return JSON.parse(localStorage.getItem('leader123_progress') || '{}'); } catch(e) { return {}; }
+}
+
+function renderPortal() {
+  const progress = getProgress();
+  let doneCount = 0;
+  let currentModule = 1;
+
+  // Find highest completed + next
+  for (let i = 1; i <= 6; i++) {
+    if (progress[i] === 'complete') { doneCount++; currentModule = i + 1; }
+  }
+  if (currentModule > 6) currentModule = 6;
+
+  // Stats
+  document.getElementById('stat-done').textContent = doneCount;
+  document.getElementById('stat-current').textContent = doneCount < 6 ? ('0' + currentModule).slice(-2) : '✓';
+  document.getElementById('stat-rules').textContent = doneCount * 2;
+
+  // Hero
+  const heroTitles = ['Leader 1-2-3.', 'Module 02.', 'Module 03.', 'Module 04.', 'Module 05.', 'Module 06.', 'Programme Complete.'];
+  const heroSubs = [
+    'Start with Module 01 — the single distinction that resolves 90% of what makes leadership hard.',
+    'Continue with Module 02 — title vs competency is where most new leaders get stuck.',
+    'Continue with Module 03 — ask don't tell is the method that changes everything.',
+    'Continue with Module 04 — speak to the actions, not the person.',
+    'Continue with Module 05 — buy-in vs compliance is the difference between culture and compliance.',
+    'Final module. Recognition is the mechanism that makes everything else work.',
+    'You have completed all 6 modules. Consider revisiting any module that needs reinforcement.',
+  ];
+  const heroCTAs = ['module-1.html','module-2.html','module-3.html','module-4.html','module-5.html','module-6.html','module-6.html'];
+  const heroBtnText = ['Start Module 01 →','Continue Module 02 →','Continue Module 03 →','Continue Module 04 →','Continue Module 05 →','Continue Module 06 →','Review Module 06 →'];
+
+  const idx = Math.min(doneCount, 6);
+  if (doneCount === 0) {
+    document.getElementById('hero-title').innerHTML = 'Welcome to<br><em>Leader 1-2-3.</em>';
+  } else if (doneCount === 6) {
+    document.getElementById('hero-title').innerHTML = 'Programme<br><em>Complete.</em>';
+  } else {
+    document.getElementById('hero-title').innerHTML = 'Pick up where<br><em>you left off.</em>';
+  }
+  document.getElementById('hero-sub').textContent = heroSubs[idx];
+  document.getElementById('hero-cta').href = heroCTAs[idx];
+  document.getElementById('hero-cta').textContent = heroBtnText[idx];
+
+  // Progress steps
+  for (let i = 1; i <= 6; i++) {
+    const step = document.getElementById('ps-' + i);
+    const label = document.getElementById('pl-' + i);
+    if (!step) continue;
+    if (progress[i] === 'complete') {
+      step.className = 'progress-step done';
+      label.textContent = '0' + i + ' ✓';
+    } else if (i === currentModule && doneCount < 6) {
+      step.className = 'progress-step active';
+      label.textContent = '0' + i + ' ▶';
+    } else {
+      step.className = 'progress-step';
+      label.textContent = '0' + i;
+    }
+  }
+
+  // Module cards
+  const modFiles = ['module-1.html','module-2.html','module-3.html','module-4.html','module-5.html','module-6.html'];
+  const modTitles = ['Management vs Leadership','Title vs Competency','Ask, Don't Tell','Speak to the Actions','Buy-In vs Compliance','Recognition is Currency'];
+  
+  for (let i = 1; i <= 6; i++) {
+    const card = document.getElementById('mc-' + i);
+    const statusEl = document.getElementById('ms-' + i);
+    const fillEl = document.getElementById('mf-' + i);
+    const pctEl = document.getElementById('mp-' + i);
+    const btnEl = document.getElementById('mb-' + i);
+    if (!card || !statusEl) continue;
+
+    if (progress[i] === 'complete') {
+      card.classList.remove('active-mod','locked-mod');
+      statusEl.className = 'mod-status status-done';
+      statusEl.textContent = '✓ Complete';
+      if(fillEl){fillEl.className='mod-bar-fill fill-done';fillEl.style.width='100%';}
+      if(pctEl){pctEl.textContent='Complete';pctEl.style.color='var(--green)';}
+      if(btnEl){btnEl.className='mod-btn btn-review';btnEl.textContent='Review →';}
+    } else if (i === currentModule && doneCount < 6) {
+      card.classList.add('active-mod');
+      card.classList.remove('locked-mod');
+      statusEl.className = 'mod-status status-active';
+      statusEl.textContent = 'Up Next';
+      if(fillEl){fillEl.className='mod-bar-fill fill-active';fillEl.style.width='0%';}
+      if(pctEl){pctEl.textContent='Ready';}
+      if(btnEl){btnEl.className='mod-btn btn-cont';btnEl.textContent='Start →';}
+    } else if (i > currentModule) {
+      card.classList.remove('active-mod');
+      statusEl.className = 'mod-status status-next';
+      statusEl.textContent = 'Not Started';
+      if(fillEl){fillEl.style.width='0%';}
+      if(pctEl){pctEl.textContent='Not started';}
+      if(btnEl){btnEl.className='mod-btn btn-start';btnEl.textContent='Start →';}
+    }
+  }
+
+  // Update sidebar
+  for (let i = 1; i <= 6; i++) {
+    const sbItems = document.querySelectorAll('.sb-item');
+    // handled by classes already set
+  }
+}
+
+renderPortal();
+</script>
+</body>
+</html>

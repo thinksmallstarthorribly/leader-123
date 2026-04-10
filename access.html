@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Access — Leader 1-2-3</title>
+<meta name="theme-color" content="#111111">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;600;700;800;900&family=Barlow+Condensed:wght@700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --teal:#5ec5cc;--teal-d:#3aabb3;
+  --teal-p:rgba(94,197,204,0.08);--teal-b:rgba(94,197,204,0.2);
+  --charcoal:#111;--card:#1a1a1a;--rule:rgba(255,255,255,0.07);
+  --dim:rgba(255,255,255,0.4);
+}
+html,body{height:100%;font-family:'Barlow',sans-serif;background:var(--charcoal);color:#fff;margin:0}
+body{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:24px}
+
+.access-wrap{width:100%;max-width:480px}
+.access-logo{font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:900;letter-spacing:0.14em;text-transform:uppercase;color:var(--teal);text-align:center;margin-bottom:48px;text-decoration:none;display:block}
+.access-card{background:var(--card);border:1px solid var(--rule);padding:48px;position:relative}
+.access-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--teal)}
+.access-eyebrow{font-size:10px;font-weight:800;letter-spacing:0.3em;text-transform:uppercase;color:var(--teal);margin-bottom:16px;display:block}
+.access-title{font-family:'Barlow Condensed',sans-serif;font-size:36px;font-weight:900;text-transform:uppercase;line-height:0.95;letter-spacing:-0.01em;margin-bottom:12px}
+.access-sub{font-size:14px;color:var(--dim);line-height:1.6;margin-bottom:32px}
+
+.form-group{margin-bottom:20px}
+.form-label{font-size:10px;font-weight:800;letter-spacing:0.2em;text-transform:uppercase;color:var(--dim);display:block;margin-bottom:8px}
+.form-input{width:100%;padding:14px 16px;background:rgba(255,255,255,0.05);border:1px solid var(--rule);color:#fff;font-family:'Barlow',sans-serif;font-size:16px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;outline:none;transition:border-color 0.2s}
+.form-input::placeholder{color:rgba(255,255,255,0.2);font-weight:400;text-transform:none;letter-spacing:0}
+.form-input:focus{border-color:var(--teal-b)}
+
+.btn-access{width:100%;padding:18px;background:var(--teal);color:var(--charcoal);font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:900;letter-spacing:0.12em;text-transform:uppercase;border:none;cursor:pointer;transition:all 0.2s;margin-top:8px}
+.btn-access:hover{background:#7dd6dc}
+
+.access-error{display:none;background:rgba(224,85,85,0.1);border:1px solid rgba(224,85,85,0.3);padding:14px 16px;font-size:13px;color:#e05555;margin-top:16px;line-height:1.5}
+.access-error.show{display:block}
+
+.access-footer{text-align:center;margin-top:28px}
+.access-footer a{font-size:12px;color:var(--dim);text-decoration:none;letter-spacing:0.06em;text-transform:uppercase}
+.access-footer a:hover{color:var(--teal)}
+
+@media(max-width:520px){.access-card{padding:32px 24px}}
+</style>
+</head>
+<body>
+
+<div class="access-wrap">
+  <a href="/" class="access-logo">← Leader 1-2-3</a>
+  <div class="access-card">
+    <span class="access-eyebrow">Programme Access</span>
+    <h1 class="access-title">Enter Your<br>Access Code</h1>
+    <p class="access-sub">You'll have received your access code by email after purchase. Enter it below to get into the programme.</p>
+    <div class="form-group">
+      <label class="form-label" for="code-input">Access Code</label>
+      <input type="text" id="code-input" class="form-input" placeholder="Enter your code here" autocomplete="off" autocorrect="off" autocapitalize="characters" spellcheck="false">
+    </div>
+    <button class="btn-access" onclick="checkCode()">Access the Programme →</button>
+    <div class="access-error" id="error-msg">
+      That code doesn't match our records. Check your email for the code you received after purchase, or contact us at hello@leader123.com.au
+    </div>
+  </div>
+  <div class="access-footer">
+    <a href="/">Don't have a code? Get access →</a>
+  </div>
+</div>
+
+<script>
+const VALID_CODES = [
+  'LEADER123',
+  'LEADER123NOW',
+  'L123-2026',
+  'L123-LAUNCH'
+];
+
+function checkCode() {
+  const input = document.getElementById('code-input').value.trim().toUpperCase();
+  const error = document.getElementById('error-msg');
+
+  if (!input) {
+    error.textContent = 'Please enter your access code.';
+    error.classList.add('show');
+    return;
+  }
+
+  if (VALID_CODES.includes(input)) {
+    localStorage.setItem('leader123_access', JSON.stringify({
+      ts: Date.now(),
+      code: input
+    }));
+    window.location.href = 'portal.html';
+  } else {
+    error.textContent = "That code doesn't match our records. Check your email for the code you received after purchase, or contact us at hello@leader123.com.au";
+    error.classList.add('show');
+    document.getElementById('code-input').focus();
+  }
+}
+
+document.getElementById('code-input').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') checkCode();
+});
+
+// Clear stale sessions
+['lc_access','mum180_access'].forEach(k => localStorage.removeItem(k));
+</script>
+</body>
+</html>
