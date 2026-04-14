@@ -175,6 +175,10 @@ body{display:flex;flex-direction:column}
       <div class="sb-icon locked">○</div>
       <div class="sb-info"><div class="sb-num">Module 07</div><div class="sb-label">The World Has Changed</div></div>
     </a>
+    <a href="module-8.html" class="sb-item">
+      <div class="sb-icon locked">○</div>
+      <div class="sb-info"><div class="sb-num">Module 08</div><div class="sb-label">Numbers In Boxes</div></div>
+    </a>
     <div class="sb-divider"></div>
     <div class="sb-section">Resources</div>
     <a href="#" class="sb-item">
@@ -206,6 +210,7 @@ body{display:flex;flex-direction:column}
         <div style="flex:1"><div class="progress-step" id="ps-5"></div><div class="progress-label" id="pl-5">05</div></div>
         <div style="flex:1"><div class="progress-step" id="ps-6"></div><div class="progress-label" id="pl-6">06</div></div>
         <div style="flex:1"><div class="progress-step" id="ps-7"></div><div class="progress-label" id="pl-7">07</div></div>
+        <div style="flex:1"><div class="progress-step" id="ps-8"></div><div class="progress-label" id="pl-8">08</div></div>
       </div>
     </div>
 
@@ -305,6 +310,18 @@ body{display:flex;flex-direction:column}
           <div class="mod-footer"><span class="mod-pct" id="mp-7">Not started</span><a href="module-7.html" class="mod-btn btn-start" id="mb-7">Start →</a></div>
         </div>
 
+        <div class="mod-card" id="mc-8">
+          <div class="mod-ghost-num">08</div>
+          <div class="mod-card-top">
+            <span class="mod-num-badge">Module 08</span>
+            <span class="mod-status status-locked">Locked</span>
+          </div>
+          <div class="mod-title">Numbers In Boxes</div>
+          <div class="mod-body">What the fuck are KPIs? You were promoted for competence in something else. Now day one hits and suddenly there are spreadsheets, dashboards, and a thousand boxes with numbers in them.</div>
+          <div class="mod-bar"><div class="mod-bar-fill" id="mf-8" style="width:0%"></div></div>
+          <div class="mod-footer"><span class="mod-pct" id="mp-8">Locked</span><a href="module-8.html" class="mod-btn btn-locked">Locked →</a></div>
+        </div>
+
       </div>
 
       <div class="bottom-row">
@@ -366,6 +383,7 @@ const MODULES = [
   { num: 5, title: 'Buy-In vs Compliance', file: 'module-5.html' },
   { num: 6, title: 'Recognition is Currency', file: 'module-6.html' },
   { num: 7, title: 'The World Has Changed', file: 'module-7.html' },
+  { num: 8, title: 'Numbers In Boxes', file: 'module-8.html' },
 ];
 
 function getProgress() {
@@ -381,15 +399,15 @@ function renderPortal() {
   for (let i = 1; i <= 6; i++) {
     if (progress[i] === 'complete') { doneCount++; currentModule = i + 1; }
   }
-  if (currentModule > 7) currentModule = 7;
+  if (currentModule > 8) currentModule = 8;
 
   // Stats
   document.getElementById('stat-done').textContent = doneCount;
-  document.getElementById('stat-current').textContent = doneCount < 7 ? ('0' + currentModule).slice(-2) : '✓';
+  document.getElementById('stat-current').textContent = doneCount < 8 ? ('0' + currentModule).slice(-2) : '✓';
   document.getElementById('stat-rules').textContent = doneCount * 2;
 
   // Hero
-  const heroTitles = ['Leader 1-2-3.', 'Module 02.', 'Module 03.', 'Module 04.', 'Module 05.', 'Module 06.', 'Module 07.', 'Programme Complete.'];
+  const heroTitles = ['Leader 1-2-3.', 'Module 02.', 'Module 03.', 'Module 04.', 'Module 05.', 'Module 06.', 'Module 07.', 'Module 08.', 'Programme Complete.'];
   const heroSubs = [
     'Start with Module 01 — the single distinction that resolves 90% of what makes leadership hard.',
     'Continue with Module 02 — title vs competency is where most new leaders get stuck.',
@@ -399,10 +417,10 @@ function renderPortal() {
     'Final module. Recognition is the mechanism that makes everything else work.',
     'You have completed all 7 modules. Consider revisiting any module that needs reinforcement.',
   ];
-  const heroCTAs = ['module-1.html','module-2.html','module-3.html','module-4.html','module-5.html','module-6.html','module-7.html','module-7.html'];
-  const heroBtnText = ['Start Module 01 →','Continue Module 02 →','Continue Module 03 →','Continue Module 04 →','Continue Module 05 →','Continue Module 06 →','Start Module 07 →','Review Module 07 →'];
+  const heroCTAs = ['module-1.html','module-2.html','module-3.html','module-4.html','module-5.html','module-6.html','module-7.html','module-8.html','module-8.html'];
+  const heroBtnText = ['Start Module 01 →','Continue Module 02 →','Continue Module 03 →','Continue Module 04 →','Continue Module 05 →','Continue Module 06 →','Continue Module 07 →','Start Module 08 →','Review Module 08 →'];
 
-  const idx = Math.min(doneCount, 7);
+  const idx = Math.min(doneCount, 8);
   if (doneCount === 0) {
     document.getElementById('hero-title').innerHTML = 'Welcome to<br><em>Leader 1-2-3.</em>';
   } else if (doneCount === 6) {
@@ -415,7 +433,7 @@ function renderPortal() {
   document.getElementById('hero-cta').textContent = heroBtnText[idx];
 
   // Progress steps
-  for (let i = 1; i <= 7; i++) {
+  for (let i = 1; i <= 8; i++) {
     const step = document.getElementById('ps-' + i);
     const label = document.getElementById('pl-' + i);
     if (!step) continue;
@@ -432,7 +450,7 @@ function renderPortal() {
   }
 
   // Module cards
-  const modFiles = ['module-1.html','module-2.html','module-3.html','module-4.html','module-5.html','module-6.html','module-7.html'];
+  const modFiles = ['module-1.html','module-2.html','module-3.html','module-4.html','module-5.html','module-6.html','module-7.html','module-8.html'];
   const modTitles = ['Management vs Leadership','Title vs Competency','Ask, Don't Tell','Speak to the Actions','Buy-In vs Compliance','Recognition is Currency'];
   
   for (let i = 1; i <= 6; i++) {
