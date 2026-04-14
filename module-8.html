@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Module 08: Numbers In Boxes | Leader 1-2-3</title>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,400;0,600;0,700;0,800;0,900;1,400;1,700&family=Barlow+Condensed:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b0b0d;
+      --bg-card: #111116;
+      --bg-card-hover: #17171c;
+      --text: #f0ece4;
+      --text-muted: #7e7b76;
+      --text-dim: #3a3a38;
+      --teal: #3aabb3;
+      --border: #1e1e23;
+      --border-mid: #2e2e34;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Barlow', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* NAV */
+    .nav-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px 40px;
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-brand {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      color: var(--teal);
+      text-transform: uppercase;
+      text-decoration: none;
+    }
+    .nav-back {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--text); }
+
+    /* HERO */
+    .hero {
+      padding: 60px 40px 40px;
+      border-bottom: 1px solid var(--border);
+    }
+    .module-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--teal);
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+    .hero h1 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(42px, 6vw, 72px);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+      line-height: 0.92;
+      margin-bottom: 20px;
+    }
+    .hero-desc {
+      font-size: 18px;
+      color: var(--text-muted);
+      max-width: 700px;
+      line-height: 1.65;
+      margin-bottom: 32px;
+    }
+    .hero-context {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 16px;
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+
+    /* PART NAVIGATOR */
+    .part-nav {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-bottom: 1px solid var(--border);
+    }
+    .part-tab {
+      padding: 20px 24px;
+      border-right: 1px solid var(--border);
+      cursor: pointer;
+      transition: background 0.2s;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .part-tab:last-child { border-right: none; }
+    .part-tab:hover { background: var(--bg-card); }
+    .part-tab.active { background: var(--bg-card); border-bottom: 2px solid var(--teal); }
+    .part-tab-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      font-weight: 700;
+    }
+    .part-tab-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .part-tab.active .part-tab-title { color: var(--teal); }
+    .part-tab-status {
+      font-size: 11px;
+      color: var(--text-dim);
+      font-family: 'Barlow Condensed', sans-serif;
+      letter-spacing: 0.05em;
+    }
+    .part-tab.active .part-tab-status { color: var(--teal); }
+
+    /* CONTENT */
+    .content-area {
+      padding: 48px 40px;
+      max-width: 860px;
+    }
+    .part-section { display: none; }
+    .part-section.active { display: block; }
+
+    .section-headline {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+      line-height: 1.1;
+      margin-bottom: 28px;
+    }
+
+    .pull-quote {
+      font-size: clamp(18px, 2.5vw, 26px);
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.45;
+      border-left: 3px solid var(--teal);
+      padding-left: 24px;
+      margin: 32px 0;
+    }
+
+    .body-text {
+      font-size: 18px;
+      line-height: 1.75;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+    }
+    .body-text strong { color: var(--text); font-weight: 600; }
+    .body-text em { color: var(--teal); font-style: italic; }
+
+    .rule-block {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 24px 28px;
+      margin: 28px 0;
+    }
+    .rule-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--teal);
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .rule-text {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(18px, 2.5vw, 26px);
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.3;
+    }
+
+    .contrast-block {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 24px 28px;
+      margin: 28px 0;
+    }
+    .contrast-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+    .contrast-row {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 16px;
+      align-items: flex-start;
+    }
+    .contrast-from, .contrast-to {
+      flex: 1;
+      padding: 16px 20px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+    }
+    .contrast-from { background: rgba(224, 85, 85, 0.05); border-color: rgba(224, 85, 85, 0.2); }
+    .contrast-to { background: rgba(60, 232, 122, 0.05); border-color: rgba(60, 232, 122, 0.2); }
+    .contrast-from-label, .contrast-to-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .contrast-from-label { color: #e05555; }
+    .contrast-to-label { color: #3ce87a; }
+    .contrast-from p, .contrast-to p {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* TELEPHONE GAME ARROWS */
+    .telephone-chain {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      margin: 32px 0;
+      overflow-x: auto;
+      padding-bottom: 8px;
+    }
+    .telephone-node {
+      flex-shrink: 0;
+      padding: 16px 20px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--bg-card);
+      text-align: center;
+      min-width: 140px;
+    }
+    .telephone-node-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--teal);
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .telephone-node-text {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+    .telephone-arrow {
+      flex-shrink: 0;
+      padding: 0 12px;
+      color: var(--text-dim);
+      font-size: 20px;
+      line-height: 1;
+    }
+    .telephone-distortion {
+      flex-shrink: 0;
+      padding: 8px 16px;
+      background: rgba(224, 85, 85, 0.08);
+      border: 1px solid rgba(224, 85, 85, 0.2);
+      border-radius: 6px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      color: #e05555;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    /* STEP FRAMEWORK */
+    .step-framework {
+      margin: 28px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .step-item {
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+      padding: 20px 24px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--bg-card);
+    }
+    .step-num {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 28px;
+      font-weight: 900;
+      color: var(--teal);
+      line-height: 1;
+      flex-shrink: 0;
+      min-width: 40px;
+    }
+    .step-content { flex: 1; }
+    .step-q {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 4px;
+    }
+    .step-a {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* OPTION BLOCKS */
+    .option-block {
+      border-radius: 8px;
+      padding: 24px 28px;
+      margin: 24px 0;
+    }
+    .option-wrong {
+      background: rgba(224, 85, 85, 0.05);
+      border: 1px solid rgba(224, 85, 85, 0.2);
+    }
+    .option-right {
+      background: rgba(60, 232, 122, 0.05);
+      border: 1px solid rgba(60, 232, 122, 0.2);
+    }
+    .option-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .option-wrong .option-label { color: #e05555; }
+    .option-right .option-label { color: #3ce87a; }
+    .option-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 22px;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: var(--text);
+      margin-bottom: 12px;
+      letter-spacing: 0.02em;
+    }
+    .option-text {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 12px;
+    }
+    .option-tag {
+      display: inline-block;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 100px;
+    }
+    .tag-wrong {
+      background: rgba(224, 85, 85, 0.12);
+      color: #e05555;
+    }
+    .tag-right {
+      background: rgba(60, 232, 122, 0.12);
+      color: #3ce87a;
+    }
+
+    /* DIVIDER */
+    .divider-short {
+      width: 48px;
+      height: 2px;
+      background: var(--teal);
+      margin: 32px 0;
+    }
+
+    /* REFLECTION */
+    .reflection {
+      border-top: 1px solid var(--border);
+      padding: 32px 40px;
+      margin-top: 48px;
+    }
+    .reflection-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+    .reflection-prompt {
+      font-size: 17px;
+      color: var(--text-muted);
+      line-height: 1.65;
+      font-style: italic;
+    }
+
+    /* BOTTOM NAV */
+    .module-nav {
+      display: flex;
+      justify-content: space-between;
+      padding: 28px 40px;
+      border-top: 1px solid var(--border);
+    }
+    .module-nav a {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 13px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 700;
+      text-decoration: none;
+      color: var(--text-muted);
+      transition: color 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .module-nav a:hover { color: var(--teal); }
+
+    @media (max-width: 768px) {
+      .part-nav { grid-template-columns: 1fr; }
+      .part-tab { border-right: none; border-bottom: 1px solid var(--border); }
+      .telephone-chain { flex-direction: column; align-items: stretch; }
+      .telephone-arrow { display: none; }
+      .telephone-distortion { display: none; }
+      .contrast-row { flex-direction: column; }
+      .hero, .content-area, .reflection, .module-nav { padding-left: 20px; padding-right: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOP NAV -->
+<nav class="nav-top">
+  <a href="/" class="nav-brand">Leader 1-2-3</a>
+  <a href="portal.html" class="nav-back">&#8592; Dashboard</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="module-label">Module 08 &mdash; Layer Three &mdash; The Mechanics</div>
+  <h1>Numbers<br>In Boxes</h1>
+  <p class="hero-desc">
+    What the fuck are KPIs? You were promoted for competence in something else. Now day one hits and suddenly there are spreadsheets, dashboards, and a thousand boxes with numbers in them. This module teaches you what you are actually looking at.
+  </p>
+  <div class="hero-context">
+    <span>3 Component Parts</span>
+    &nbsp;&middot;&nbsp;
+    <span>Reflect &amp; Apply</span>
+  </div>
+</div>
+
+<!-- PART NAVIGATOR -->
+<div class="part-nav">
+  <div class="part-tab active" onclick="showPart(1)">
+    <div class="part-tab-label">Part 1</div>
+    <div class="part-tab-title">The Translation Layer</div>
+    <div class="part-tab-status">Reality gets compressed into numbers</div>
+  </div>
+  <div class="part-tab" onclick="showPart(2)">
+    <div class="part-tab-label">Part 2</div>
+    <div class="part-tab-title">The Two Options</div>
+    <div class="part-tab-status">Rub it out or trace it back</div>
+  </div>
+  <div class="part-tab" onclick="showPart(3)">
+    <div class="part-tab-label">Part 3</div>
+    <div class="part-tab-title">The Leader's Job</div>
+    <div class="part-tab-status">Go to the person behind the number</div>
+  </div>
+</div>
+
+<!-- CONTENT AREA -->
+<div class="content-area">
+
+  <!-- ===== PART 1: THE TRANSLATION LAYER ===== -->
+  <div class="part-section active" id="part-1">
+
+    <div class="section-headline">You Did Not Get<br>Promoted For This.</div>
+
+    <p class="body-text">
+      You were good at your job. That is why you are here. But the job you were good at did not involve <strong>a thousand boxes with random numbers in them</strong>. It involved doing something. Making things. Solving things. Moving.
+    </p>
+
+    <p class="body-text">
+      Then leadership hits and suddenly: spreadsheets, dashboards, reports. Numbers everywhere. Numbers on people. Numbers on performance. Numbers on things you cannot even name.
+    </p>
+
+    <p class="body-text">
+      And the pressure is real: <em>these numbers have to hit this target. By this date. Every week.</em>
+    </p>
+
+    <p class="body-text">
+      So what do most new leaders do? They default to: <strong>make the numbers go up.</strong>
+    </p>
+
+    <p class="pull-quote">
+      That is where it breaks.<br>The moment you start managing numbers<br>instead of the behaviour behind them<br>you stop being a leader.
+    </p>
+
+    <div class="rule-block">
+      <div class="rule-label">The Structural Problem</div>
+      <div class="rule-text">
+        At the top of the business:<br>They investigate numbers in boxes.<br><br>
+        At the front line:<br>You investigate people, behaviour, experience, and problems.
+      </div>
+    </div>
+
+    <p class="body-text">
+      These are not the same thing. And the way we report from the front line to the top <strong>is in numbers in boxes</strong>. That translation is where everything goes wrong.
+    </p>
+
+    <div class="section-headline" style="margin-top:40px;">The Telephone Game</div>
+
+    <p class="body-text">
+      Every number in every box is the end result of a human action. Not effort. Not intention. <strong>Action.</strong> Repeated over time.
+    </p>
+
+    <p class="body-text">
+      Here is what happens between the front line and the top:
+    </p>
+
+    <div class="telephone-chain">
+      <div class="telephone-node">
+        <div class="telephone-node-label">Reality</div>
+        <div class="telephone-node-text">Front line behaviour. What is actually happening.</div>
+      </div>
+      <div class="telephone-arrow">&#8594;</div>
+      <div class="telephone-distortion">translated<br>&#8595;</div>
+      <div class="telephone-node">
+        <div class="telephone-node-label">Numbers</div>
+        <div class="telephone-node-text">Compressed into metrics. Context stripped.</div>
+      </div>
+      <div class="telephone-arrow">&#8594;</div>
+      <div class="telephone-distortion">interpreted<br>&#8595;</div>
+      <div class="telephone-node">
+        <div class="telephone-node-label">Strategy</div>
+        <div class="telephone-node-text">Decisions made at the top. Based on those numbers.</div>
+      </div>
+      <div class="telephone-arrow">&#8594;</div>
+      <div class="telephone-distortion">pushed down<br>&#8595;</div>
+      <div class="telephone-node">
+        <div class="telephone-node-label">Front Line</div>
+        <div class="telephone-node-text">Pressure arrives. Reality has changed.</div>
+      </div>
+    </div>
+
+    <p class="body-text">
+      Every step introduces <strong>distortion</strong>. If you do not correct it at your level, you are actively contributing to the breakdown. The top makes decisions based on something that no longer reflects what is actually happening.
+    </p>
+
+    <p class="body-text">
+      And then those decisions come back down and make things worse.
+    </p>
+
+    <div class="divider-short"></div>
+
+    <div class="rule-block">
+      <div class="rule-label">The Core Rule</div>
+      <div class="rule-text">
+        Numbers are not reality.<br>Numbers are a compressed translation of behaviour.<br><br>
+        <strong>Every number in every box<br>is the end result of a human action.</strong>
+      </div>
+    </div>
+
+    <div class="reflection">
+      <div class="reflection-label">Reflect</div>
+      <p class="reflection-prompt">Think of one KPI you have been staring at recently. What behaviour on your team actually creates that number? Not the label. The specific daily action.</p>
+    </div>
+
+  </div>
+
+  <!-- ===== PART 2: THE TWO OPTIONS ===== -->
+  <div class="part-section" id="part-2">
+
+    <div class="section-headline">Every Number.<br>Every KPI.<br>Every Report.</div>
+
+    <p class="body-text">
+      There are only two ways to change a number in a box.
+    </p>
+
+    <p class="body-text">
+      Most leaders never learn this. They are not taught it. So they improvise. And most of the time, they pick the wrong option.
+    </p>
+
+    <div class="option-block option-wrong">
+      <div class="option-label">Option 1</div>
+      <div class="option-title">Rub It Out. Write A New One.</div>
+      <p class="option-text">
+        Find the box. Rub out the number that is already there. Write a better one. Move on.
+      </p>
+      <p class="option-text">
+        If that number is embarrassing, you can also: simplify the report, change the measurement, redefine the metric, remove the box entirely. All variations of the same broken strategy.
+      </p>
+      <span class="option-tag tag-wrong">Short term fix. Zero integrity. Compounds the problem.</span>
+    </div>
+
+    <div class="option-block option-right">
+      <div class="option-label">Option 2</div>
+      <div class="option-title">Trace It Back To Behaviour.</div>
+      <p class="option-text">
+        What created this number? Who is responsible? What is actually happening on the ground? Then go to the person. Engage them. Coach the behaviour. Build the capability. Reinforce consistency.
+      </p>
+      <p class="option-text">
+        The person changes. The behaviour changes. The number changes. <strong>That is leadership.</strong>
+      </p>
+      <span class="option-tag tag-right">Slow. Real. The only way that actually works.</span>
+    </div>
+
+    <div class="pull-quote">
+      You do not fix numbers.<br>You fix the behaviour<br>that produces them.
+    </div>
+
+    <div class="section-headline" style="margin-top:40px;">Why Option 1 Becomes The Default</div>
+
+    <p class="body-text">
+      When leaders do not understand what a KPI is actually measuring, pressure from the top flows like this:
+    </p>
+
+    <div class="contrast-block">
+      <div class="contrast-label">How The Pressure Flows</div>
+      <div class="contrast-row">
+        <div class="contrast-from">
+          <div class="contrast-from-label">Top Says</div>
+          <p>Fix the numbers.</p>
+        </div>
+        <div class="contrast-to">
+          <div class="contrast-to-label">Middle Hears</div>
+          <p>Make the report look right.</p>
+        </div>
+      </div>
+      <div class="contrast-row">
+        <div class="contrast-from">
+          <div class="contrast-from-label">Middle Does</div>
+          <p>Adjusts the numbers to hit targets.</p>
+        </div>
+        <div class="contrast-to">
+          <div class="contrast-to-label">Front Line Feels</div>
+          <p>Just do not get in trouble.</p>
+        </div>
+      </div>
+    </div>
+
+    <p class="body-text">
+      What happens then? Numbers get padded. Reporting gets gamed. Context gets lost. Truth gets buried. <strong>The top is now making decisions based on fiction.</strong>
+    </p>
+
+    <p class="body-text">
+      That is the loop. And most leaders never break it because no one teaches them there is another option.
+    </p>
+
+    <div class="rule-block" style="border-color: rgba(60,232,122,0.2); background: rgba(60,232,122,0.03);">
+      <div class="rule-label" style="color:#3ce87a;">The Standard</div>
+      <div class="rule-text">
+        If you are not willing to go to the person behind the number&hellip;<br><strong>you are not doing leadership.<br>You are just administrating outcomes<br>you do not understand.</strong>
+      </div>
+    </div>
+
+    <div class="reflection">
+      <div class="reflection-label">Reflect</div>
+      <p class="reflection-prompt">Have you ever been guilty of Option 1? A number that needed to look right but was never traced back to what was actually happening?</p>
+    </div>
+
+  </div>
+
+  <!-- ===== PART 3: THE LEADER'S JOB ===== -->
+  <div class="part-section" id="part-3">
+
+    <div class="section-headline">Your Job Is Not<br>To Manage Numbers.</div>
+
+    <p class="body-text">
+      Your job is to interpret numbers, translate them into behaviour, and intervene at the human level.
+    </p>
+
+    <p class="body-text">
+      If you skip that step, you are not leading. You are just rearranging boxes and hoping the result looks right.
+    </p>
+
+    <p class="body-text">
+      When you look at any KPI, run this:
+    </p>
+
+    <div class="step-framework">
+
+      <div class="step-item">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <div class="step-q">What is this measuring?</div>
+          <div class="step-a">Be specific. Not the label on the box. The actual behaviour this metric is trying to capture.</div>
+        </div>
+      </div>
+
+      <div class="step-item">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <div class="step-q">What behaviour creates this number?</div>
+          <div class="step-a">Daily actions. Not vague effort. The specific repeatable behaviour that moves this metric.</div>
+        </div>
+      </div>
+
+      <div class="step-item">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <div class="step-q">Who owns that behaviour?</div>
+          <div class="step-a">A person. Always. A name. Someone you can actually talk to.</div>
+        </div>
+      </div>
+
+      <div class="step-item">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <div class="step-q">What is getting in their way?</div>
+          <div class="step-a">Skill, clarity, environment, or attitude. Four possible blockers. Know which one you are dealing with before you act.</div>
+        </div>
+      </div>
+
+      <div class="step-item">
+        <div class="step-num">5</div>
+        <div class="step-content">
+          <div class="step-q">What needs to change?</div>
+          <div class="step-a">One behaviour. Not ten. The one thing that will move the number if that behaviour is done consistently.</div>
+        </div>
+      </div>
+
+      <div class="step-item">
+        <div class="step-num">6</div>
+        <div class="step-content">
+          <div class="step-q">What support do they need?</div>
+          <div class="step-a">Training, tools, feedback, or repetition. Know what they actually need before you try to fix it.</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="divider-short"></div>
+
+    <p class="body-text">
+      The number is the output. The person is the input. <strong>Go to the input.</strong>
+    </p>
+
+    <div class="rule-block" style="border-color: rgba(60,232,122,0.2); background: rgba(60,232,122,0.03);">
+      <div class="rule-label" style="color:#3ce87a;">The Line To Land It</div>
+      <div class="rule-text">
+        If you want one thing to remember from this module:<br><br>
+        You do not fix numbers.<br>
+        You fix the behaviour that produces them.<br><br>
+        And if you are not willing to go to the person behind the number&hellip;<br>
+        <strong>you are not doing leadership.</strong>
+      </div>
+    </div>
+
+    <div class="reflection">
+      <div class="reflection-label">Apply</div>
+      <p class="reflection-prompt">Pick one KPI on your team right now. Run it through the six-step framework. Then go to the person. That is the assignment.</p>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- BOTTOM NAV -->
+<div class="module-nav">
+  <a href="module-7.html">&#8592; Module 07</a>
+  <a href="portal.html">Dashboard &#8594;</a>
+</div>
+
+<script>
+  function showPart(n) {
+    document.querySelectorAll('.part-section').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.part-tab').forEach(el => el.classList.remove('active'));
+    document.getElementById('part-' + n).classList.add('active');
+    document.querySelectorAll('.part-tab')[n - 1].classList.add('active');
+  }
+</script>
+
+</body>
+</html>
