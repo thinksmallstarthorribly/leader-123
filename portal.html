@@ -374,6 +374,14 @@ function signOut() {
   window.location.href = 'access.html';
 }
 
+function getUserPrefix() {
+  try {
+    const s = JSON.parse(localStorage.getItem('leader123_access')||'null');
+    if (s && s.code) return 'u_' + s.code.replace(/[^a-zA-Z0-9]/g,'_') + '_';
+  } catch(e) {}
+  return 'u_guest_';
+}
+
 // Progress tracking
 const MODULES = [
   { num: 1, title: 'Management vs Leadership', file: 'module-1.html' },
@@ -387,7 +395,7 @@ const MODULES = [
 ];
 
 function getProgress() {
-  try { return JSON.parse(localStorage.getItem('leader123_progress') || '{}'); } catch(e) { return {}; }
+  try { return JSON.parse(localStorage.getItem(getUserPrefix()+'leader123_progress') || '{}'); } catch(e) { return {}; }
 }
 
 function renderPortal() {

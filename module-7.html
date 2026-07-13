@@ -667,6 +667,38 @@
 </div>
 
 <script>
+// Auth check + progress tracking
+(function() {
+  const session = localStorage.getItem('leader123_access');
+  if (!session) { window.location.href = 'access.html'; return; }
+  try {
+    const data = JSON.parse(session);
+    if (Date.now() - data.ts > 90 * 24 * 60 * 60 * 1000) {
+      localStorage.removeItem('leader123_access');
+      window.location.href = 'access.html';
+    }
+  } catch(e) { window.location.href = 'access.html'; }
+})();
+
+function getUserPrefix() {
+  try {
+    const s = JSON.parse(localStorage.getItem('leader123_access')||'null');
+    if (s && s.code) return 'u_' + s.code.replace(/[^a-zA-Z0-9]/g,'_') + '_';
+  } catch(e) {}
+  return 'u_guest_';
+}
+
+// Mark module complete on load
+(function() {
+  const MOD_NUM = 7;
+  const progress = JSON.parse(localStorage.getItem(getUserPrefix()+'leader123_progress') || '{}');
+  if (!progress[MOD_NUM]) {
+    progress[MOD_NUM] = 'complete';
+    localStorage.setItem(getUserPrefix()+'leader123_progress', JSON.stringify(progress));
+  }
+})();
+</script>
+<script>
   function showPart(n) {
     document.querySelectorAll('.part-tab').forEach(function(tab, i) {
       tab.classList.toggle('active', i + 1 === n);

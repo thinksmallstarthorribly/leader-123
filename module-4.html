@@ -113,16 +113,23 @@ html,body{font-family:'Barlow',sans-serif;background:var(--charcoal);color:#fff;
 <script>
 (function() {
   const session = localStorage.getItem('leader123_access');
+  function getUserPrefix() {
+    try {
+      const s = JSON.parse(session||'null');
+      if (s && s.code) return 'u_' + s.code.replace(/[^a-zA-Z0-9]/g,'_') + '_';
+    } catch(e) {}
+    return 'u_guest_';
+  }
   if (!session) { window.location.href = 'access.html'; return; }
 })();
 
 // Mark this module as visited/complete when user arrives
 (function() {
   try {
-    const progress = JSON.parse(localStorage.getItem('leader123_progress') || '{}');
+    const progress = JSON.parse(localStorage.getItem(getUserPrefix()+'leader123_progress') || '{}');
     if (!progress[4]) {
       progress[4] = 'complete';
-      localStorage.setItem('leader123_progress', JSON.stringify(progress));
+      localStorage.setItem(getUserPrefix()+'leader123_progress', JSON.stringify(progress));
     }
   } catch(e) {}
 })();
