@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Leader 1-2-3 — The Framework They Don't Give You With the Title</title>
+    <meta name="description" content="Your first year leading doesn't have to be a shit-show. Leader 1-2-3 is 8 self-paced text modules for new leaders, and for people already in the role. $147 AUD. Lifetime access.">
+    <meta property="og:title" content="Leader 1-2-3 — The Framework They Don't Give You With the Title">
+    <meta property="og:description" content="Your first year leading doesn't have to be a shit-show. Leader 1-2-3 is 8 self-paced text modules for new leaders, and for people already in the role. $147 AUD. Lifetime access.">
+    <meta property="og:url" content="https://leader123.com.au/">
+    <meta property="og:type" content="website">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' fill='%238BB5B0'>LEADER</text></svg>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -139,6 +144,15 @@
             line-height: 1.6;
             margin-bottom: 24px;
             max-width: 450px;
+        }
+
+        .hero .hero-format {
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--charcoal);
+            letter-spacing: 0.01em;
+            max-width: 480px;
+            margin-top: -8px;
         }
 
         .hero-cta {
@@ -397,6 +411,140 @@
             width: 100%;
         }
 
+        .price-features a,
+        .faq-item a,
+        .guarantee-card a,
+        footer a {
+            color: var(--charcoal);
+            font-weight: 600;
+            text-decoration: underline;
+            text-underline-offset: 2px;
+        }
+
+        /* Story */
+        .story-section {
+            padding: 80px 24px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .story-section h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.5rem;
+            letter-spacing: 0.02em;
+            text-align: center;
+            margin-bottom: 12px;
+            color: var(--text-gray);
+        }
+
+        .story-section .subtitle {
+            text-align: center;
+            color: var(--text-gray);
+            margin-bottom: 32px;
+        }
+
+        .story-section p {
+            color: var(--text-gray);
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+
+        .story-section p strong {
+            color: var(--charcoal);
+            font-weight: 700;
+        }
+
+        /* Guarantee */
+        .guarantee-section {
+            padding: 20px 24px 80px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .guarantee-section h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.5rem;
+            letter-spacing: 0.02em;
+            text-align: center;
+            margin-bottom: 20px;
+            color: var(--text-gray);
+        }
+
+        .guarantee-card {
+            background: var(--white);
+            border: 2px solid var(--teal);
+            border-radius: 12px;
+            padding: 36px 32px;
+        }
+
+        .guarantee-card p {
+            color: var(--text-gray);
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 14px;
+        }
+
+        .guarantee-card p:last-child {
+            margin-bottom: 0;
+        }
+
+        .guarantee-card strong {
+            color: var(--charcoal);
+        }
+
+        .guarantee-card .btn {
+            margin-top: 8px;
+        }
+
+        /* FAQ */
+        .faq-section {
+            padding: 80px 24px;
+            max-width: 700px;
+            margin: 0 auto;
+            background: var(--white);
+        }
+
+        .faq-wrap {
+            background: var(--white);
+        }
+
+        .faq-section h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.5rem;
+            letter-spacing: 0.02em;
+            text-align: center;
+            margin-bottom: 12px;
+            color: var(--text-gray);
+        }
+
+        .faq-section .subtitle {
+            text-align: center;
+            color: var(--text-gray);
+            margin-bottom: 32px;
+        }
+
+        .faq-item {
+            padding: 20px 0;
+            border-bottom: 1px solid #E8E8E8;
+        }
+
+        .faq-item h3 {
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 0;
+            color: var(--charcoal);
+            margin-bottom: 8px;
+        }
+
+        .faq-item p {
+            font-size: 0.95rem;
+            color: var(--text-gray);
+            line-height: 1.65;
+            margin: 0;
+        }
+
         /* Footer */
         footer {
             padding: 60px 24px;
@@ -430,6 +578,16 @@
 
             .pricing-card {
                 padding: 32px 24px;
+            }
+
+            .guarantee-card {
+                padding: 28px 22px;
+            }
+
+            .story-section h2,
+            .guarantee-section h2,
+            .faq-section h2 {
+                font-size: 2.1rem;
             }
         }
     </style>
@@ -470,9 +628,11 @@
 
         <p>You got the title. The team. The responsibility. And nobody handed you the framework for what to do next. You are not alone in that. And it is not a reflection of your capability.</p>
 
+        <p class="hero-format">8 self-paced text modules. One sitting each. Lifetime access. $147 AUD.</p>
+
         <div class="hero-cta">
             <a href="https://buy.stripe.com/5kQcN4a3AgRH1oI6jw1ZS03" class="btn" target="_blank">Get Access — $147</a>
-            <a href="#problem" class="btn btn-outline">Learn More</a>
+            <a href="#who" class="btn btn-outline">Learn More</a>
         </div>
     </section>
 
@@ -495,6 +655,24 @@
         </div>
     </div>
 
+    <section class="modules-section" id="who">
+        <h2>WHO IT'S FOR</h2>
+        <p class="subtitle">Two starting points. Same eight modules. The people who need this were handed a role and not an operating system.</p>
+
+        <div class="modules-grid">
+            <div class="module-card">
+                <div class="module-num">New to the role</div>
+                <h3>Thrown in without the capability</h3>
+                <p>The title arrived. The technical capability did not. People, KPIs, a Monday morning, and a team waiting for you to already know. You don't. That is not a verdict on you. It is a gap in what you were given.</p>
+            </div>
+            <div class="module-card">
+                <div class="module-num">Already leading</div>
+                <h3>Self-leadership for the person in the chair</h3>
+                <p>You have been doing the job. It still runs you. This is how you think, what you ask, and whether the team works when you leave the room. Same programme. You are not behind. You are under-tooled.</p>
+            </div>
+        </div>
+    </section>
+
     <section class="problem-section" id="problem">
         <h2>Sound familiar?</h2>
 
@@ -516,7 +694,7 @@
 
     <section class="modules-section" id="modules">
         <h2>8 MODULES. ZERO FLUFF.</h2>
-        <p class="subtitle">Each module is designed to be consumed in one sitting. Practical. Direct. Actionable.</p>
+        <p class="subtitle">Self-paced text. One module, one sitting. Read it on your phone between meetings. No videos. No cohort. Lifetime access when you need to come back.</p>
 
         <div class="modules-grid">
             <div class="module-card">
@@ -569,9 +747,48 @@
         </div>
     </section>
 
+    <section class="story-section" id="story">
+        <h2>HE ASKED UNTIL I LOST.</h2>
+        <p class="subtitle">Sixteen years ago. Wrong shoes. Two pages of excuses. One conversation that still runs this programme.</p>
+
+        <p>I wore the wrong shoes to work. Jason, my team leader, was sent to talk to me about the dress code. I came back to the follow-up with two pages of notes on what everyone else was wearing. I was certain I was being singled out.</p>
+
+        <p>He never raised his voice. He asked questions until I talked myself into the corner.</p>
+
+        <div class="rule-box">
+            <div class="rule-label">Jason</div>
+            <div class="rule-text">"So you feel that because other people are doing the wrong thing, you should be able to do the wrong thing too?"</div>
+        </div>
+
+        <p><strong>Fuck. 2-0 and finished.</strong></p>
+
+        <p>Monday I wore the right clothes. He said he was proud of me. One sentence. I come from a background where that was not something I heard often. It held a lot of weight.</p>
+
+        <p>What I did not know: management was already scouting me. Jason knew. He was not managing a dress code. <strong>He was leading me toward something I could not see yet.</strong></p>
+
+        <p>I have told that story to close to 3,000 people. Ask, don't tell. Recognition as currency. Identity drives behaviour. Leading from competency, not the title. All of it was in that one conversation.</p>
+
+        <p>Then they gave me a team. Sixteen people. I had the title and none of the capability. Peter Principle, live: risen to my highest level of incompetence. People showed up every day with problems. I thought if I got involved in every one of those lives I would collapse, so I went impersonal. I'm the boss. Not: how can I serve you.</p>
+
+        <p><strong>I slipped around in my own shit for a while.</strong></p>
+
+        <p>Then someone finally taught me frameworks. It opened a part of my brain that still runs everything. I asked to move into learning and development, got serious about it, then asked to go back into management with a new team. It came naturally. I was the first Manager of the Quarter. Name on a glass plaque in the foyer. I did not see it coming. The team I had kept at arm's length took me out for my birthday.</p>
+
+        <p>The rule I had to beat out of myself: shut up and listen. I was good at telling. I did not want a personal relationship with someone else's problems. That was the skill. I was dodging it.</p>
+    </section>
+
     <section class="quote-section">
         <blockquote>"I made all the mistakes in the guide. That's how I know them so well. And that's why I wrote them down."</blockquote>
         <p class="author">— Alex Cooper, Creator of Leader 1-2-3</p>
+    </section>
+
+    <section class="guarantee-section" id="guarantee">
+        <h2>30-DAY MONEY-BACK.</h2>
+        <div class="guarantee-card">
+            <p>Buy it. Read the modules. If this is not the framework you needed, email <a href="mailto:hello@leader123.com.au">hello@leader123.com.au</a> within 30 days and ask for the money back.</p>
+            <p><strong>You get the $147 refunded.</strong> No quiz. No "prove you finished module six." No speech. You didn't get what you came for, you get the money back.</p>
+            <a href="https://buy.stripe.com/5kQcN4a3AgRH1oI6jw1ZS03" class="btn" target="_blank">Get Access — $147</a>
+        </div>
     </section>
 
     <section class="pricing-section" id="pricing">
@@ -580,19 +797,48 @@
             <p class="price-note">Launch Price — Down from $197</p>
 
             <ul class="price-features">
-                <li>8 Complete Modules — The Full Framework</li>
-                <li>The 3-Layer Operating System</li>
-                <li>12 Leadership Rules — Referenced & Operational</li>
-                <li>Leader 1-2-3 Workbook</li>
-                <li>Lifetime Access — Revisit Whenever You Need</li>
-                <li>Works on Any Device</li>
+                <li>8 self-paced text modules — one sitting each</li>
+                <li>The 3-layer operating system — mindset, method, mechanics</li>
+                <li>12 leadership rules, used inside the modules</li>
+                <li>The Leadership Primer — <a href="https://leader123.com.au/primer.pdf" target="_blank" rel="noopener">17-page PDF</a></li>
+                <li>Lifetime access — revisit whenever you need</li>
+                <li>Works on any device</li>
             </ul>
 
             <a href="https://buy.stripe.com/5kQcN4a3AgRH1oI6jw1ZS03" class="btn btn-full" target="_blank">Buy Now — Secure Checkout</a>
         </div>
     </section>
 
+    <div class="faq-wrap">
+        <section class="faq-section" id="faq">
+            <h2>STRAIGHT ANSWERS.</h2>
+            <p class="subtitle">The questions people ask before they pay.</p>
+
+            <div class="faq-item">
+                <h3>How do I get in after I pay?</h3>
+                <p>Checkout is Stripe. After purchase you get an access code by email. Enter it on the access page and the eight modules open. If the email is slow or the code doesn't match, write to <a href="mailto:hello@leader123.com.au">hello@leader123.com.au</a>.</p>
+            </div>
+            <div class="faq-item">
+                <h3>What's included?</h3>
+                <p>Eight self-paced text modules. The three layers: mindset, method, mechanics. The rules, used inside the modules. The <a href="https://leader123.com.au/primer.pdf" target="_blank" rel="noopener">Leadership Primer</a>, a real 17-page PDF. Lifetime access. One payment of $147 AUD. No subscription.</p>
+            </div>
+            <div class="faq-item">
+                <h3>What format is it, and how long does it take?</h3>
+                <p>Text. Not video. Each module is written to be read in one sitting. Do one, use it, come back when the job throws you the next problem. Self-paced. You keep access.</p>
+            </div>
+            <div class="faq-item">
+                <h3>What's the refund?</h3>
+                <p>30 days. Email <a href="mailto:hello@leader123.com.au">hello@leader123.com.au</a> and you get the $147 back. That's the whole policy.</p>
+            </div>
+            <div class="faq-item">
+                <h3>Who do I contact?</h3>
+                <p><a href="mailto:hello@leader123.com.au">hello@leader123.com.au</a></p>
+            </div>
+        </section>
+    </div>
+
     <footer>
+        <p>Questions: <a href="mailto:hello@leader123.com.au">hello@leader123.com.au</a></p>
         <p>© 2026 Leader 1-2-3. All rights reserved.</p>
     </footer>
 
